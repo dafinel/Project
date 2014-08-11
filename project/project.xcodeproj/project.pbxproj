@@ -28,6 +28,7 @@
 		752F4F2D1995025D00AED595 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F2C1995025D00AED595 /* MapViewController.m */; };
 		752F4F2F199502ED00AED595 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F4F2E199502ED00AED595 /* MapKit.framework */; };
 		752F4F32199506B100AED595 /* User+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F31199506B100AED595 /* User+Annotation.m */; };
+		75B3F8A41998FCEA00CCB930 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		752F4F2E199502ED00AED595 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		752F4F30199506B100AED595 /* User+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Annotation.h"; path = "Model/User+Annotation.h"; sourceTree = "<group>"; };
 		752F4F31199506B100AED595 /* User+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Annotation.m"; path = "Model/User+Annotation.m"; sourceTree = "<group>"; };
+		75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75B3F8A41998FCEA00CCB930 /* CoreLocation.framework in Frameworks */,
 				752F4F2F199502ED00AED595 /* MapKit.framework in Frameworks */,
 				7509C52E1993B70700276BD2 /* CoreGraphics.framework in Frameworks */,
 				7509C5301993B70700276BD2 /* UIKit.framework in Frameworks */,
@@ -121,6 +124,7 @@
 		7509C52A1993B70700276BD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */,
 				752F4F2E199502ED00AED595 /* MapKit.framework */,
 				7509C52B1993B70700276BD2 /* Foundation.framework */,
 				7509C52D1993B70700276BD2 /* CoreGraphics.framework */,
@@ -248,6 +252,13 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "___FULLUSERNAME___";
 				TargetAttributes = {
+					7509C5271993B70700276BD2 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
 					7509C54B1993B70700276BD2 = {
 						TestTargetID = 7509C5271993B70700276BD2;
 					};

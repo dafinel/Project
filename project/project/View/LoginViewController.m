@@ -10,6 +10,7 @@
 #import "MyAplicationViewController.h"
 #import "MapViewController.h"
 #import "ForgotPasswordViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
 #define kBaseURL @"http://localhost:3000/"
 #define kLocations @"users"
@@ -41,20 +42,15 @@
 
 
 - (void)importData {
-    
-    static NSURLSession* sharedSessionMainQueue = nil;
-    if(!sharedSessionMainQueue){
-        sharedSessionMainQueue = [NSURLSession sessionWithConfiguration:nil delegate:nil delegateQueue:[NSOperationQueue mainQueue]];
-    }
-    
     NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
     url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:self.userAndPassword]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"GET";
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    [config setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
     NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
-    
+    //NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
@@ -70,7 +66,9 @@
         }
     }];
     
-    [dataTask resume]; //8
+   // NSURLSessionDataTask *dataTask = [session dataTaskWithURL: url];
+    
+    [dataTask resume];
     
 }
 
@@ -103,8 +101,8 @@
         if ([tbvc.viewControllers[0] isKindOfClass:[MapViewController class]]) {
             MapViewController *myvc = (MapViewController *)tbvc.viewControllers[0];
             CLLocation *location= [self.locationManager location];
-            self.user.curentLocation = [location coordinate];
-            NSLog(@"%f, %f",self.user.curentLocation.latitude,self.user.curentLocation.longitude );
+            //self.user.curentLocation = [location coordinate];
+            NSLog(@"login: %f, %f",self.user.curentLocation.latitude,self.user.curentLocation.longitude );
             myvc.user = self.user;
         
             

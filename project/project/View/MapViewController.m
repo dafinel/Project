@@ -9,6 +9,7 @@
 #import "MapViewController.h"
 #import "User+Annotation.h"
 #import <MapKit/MapKit.h>
+#import <MapKit/MKAnnotationView.h>
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -29,6 +30,25 @@
     _mapView = mapView;
     self.mapView.delegate = self;
     [self updateMapViewAnnotations];
+}
+
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKPinAnnotationView *pinView = nil;
+    if(annotation != mapView.userLocation)
+    {
+        static NSString *defaultPinID = @"com.invasivecode.pin";
+        pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
+                                         initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+        
+        pinView.pinColor = MKPinAnnotationColorGreen;
+        pinView.animatesDrop = YES;
+    }
+    else {
+        [mapView.userLocation setTitle:@"I am here"];
+    }
+    
+    return pinView;
 }
 
 /*

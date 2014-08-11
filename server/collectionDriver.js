@@ -75,13 +75,32 @@ CollectionDriver.prototype.update = function(collectionName, obj, entityId, call
         else {
 	        obj._id = ObjectID(entityId); //A convert to a real obj id
 	        obj.updated_at = new Date(); //B
-            the_collection.save(obj, function(error,doc) { //C
+                the_collection.save(obj, function(error,doc) { //C
             	if (error) callback(error)
             	else callback(null, obj);
             });
         }
     });
 }
+
+//update location
+
+CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityId, callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+		console.log(obj);
+		the_collection.update({'_id':ObjectID(entityId)},
+					{ $set : {'curent_location':obj} },
+					function(error,doc) { //C
+            				    if (error) callback(error)
+            				    else callback(null, obj);
+                });
+
+        }
+    });
+}
+
 
 //delete a specific object
 CollectionDriver.prototype.delete = function(collectionName, entityId, callback) {
