@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  ForgotPasswordViewController.h
 //  project
 //
 //  Created by Andrei-Daniel Anton on 08/08/14.
@@ -7,10 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "User.h"
 
-@interface LoginViewController : UIViewController
-
-@property (nonatomic, strong) User *user;
+@interface ForgotPasswordViewController : UIViewController
 
 @end

@@ -1,5 +1,5 @@
 //
-//  LoginViewController.h
+//  MapViewController.h
 //  project
 //
 //  Created by Andrei-Daniel Anton on 08/08/14.
@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "User.h"
+#import "MyAplicationViewController.h"
 
-@interface LoginViewController : UIViewController
-
-@property (nonatomic, strong) User *user;
+@interface MapViewController : MyAplicationViewController
 
 @end
