@@ -57,7 +57,7 @@
                                 </state>
                                 <connections>
                                     <action selector="loginAction:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dQ6-Rh-v0T"/>
-                                    <segue destination="MnH-cd-xVu" kind="push" identifier="login" id="cc8-3J-Jo1"/>
+                                    <segue destination="MnH-cd-xVu" kind="modal" identifier="login" modalTransitionStyle="flipHorizontal" id="cc8-3J-Jo1"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSc-68-bIX">
@@ -116,11 +116,11 @@
                         <viewControllerLayoutGuide type="bottom" id="BLK-mF-NqG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NtO-dz-1oB">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bl8-RT-fJl">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>

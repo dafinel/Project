@@ -15,13 +15,13 @@
 #define kBaseURL @"http://localhost:3000/"
 #define kLocations @"users"
 
-@interface LoginViewController ()<CLLocationManagerDelegate>
+@interface LoginViewController ()
+
 @property (weak, nonatomic  ) IBOutlet UITextField *userTextinput;
 @property (weak, nonatomic  ) IBOutlet UITextField *passwordTextInput;
 @property (nonatomic, strong) NSString *userAndPassword;
 @property (weak, nonatomic  ) IBOutlet UIActivityIndicatorView *spinner;
 @property (nonatomic        ) BOOL doSegue;
-@property (nonatomic, strong) CLLocationManager *locationManager;
 
 @end
 
@@ -29,17 +29,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    [self.locationManager startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
 }
-
 
 - (void)importData {
     NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
@@ -57,6 +48,7 @@
             if ([responseArray count]) {
                 User *user =[[User alloc] initWithDictionary:responseArray];
                 self.user = user;
+                [[NSUserDefaults standardUserDefaults]setValue:self.user._id forKey:@"_id"];
                 [self.spinner stopAnimating];
                 self.doSegue = YES;
             
@@ -100,7 +92,7 @@
          UITabBarController *tbvc = (UITabBarController *)segue.destinationViewController;
         if ([tbvc.viewControllers[0] isKindOfClass:[MapViewController class]]) {
             MapViewController *myvc = (MapViewController *)tbvc.viewControllers[0];
-            CLLocation *location= [self.locationManager location];
+          //  CLLocation *location= [self.locationManager location];
             //self.user.curentLocation = [location coordinate];
             NSLog(@"login: %f, %f",self.user.curentLocation.latitude,self.user.curentLocation.longitude );
             myvc.user = self.user;

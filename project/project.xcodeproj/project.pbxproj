@@ -22,6 +22,7 @@
 		7509C5501993B70700276BD2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7509C52F1993B70700276BD2 /* UIKit.framework */; };
 		7509C5581993B70700276BD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7509C5561993B70700276BD2 /* InfoPlist.strings */; };
 		7509C55A1993B70700276BD2 /* projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509C5591993B70700276BD2 /* projectTests.m */; };
+		7520BEC0199A4BAA00BB1733 /* SendLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7520BEBF199A4BAA00BB1733 /* SendLocation.m */; };
 		752F4F2019949D2500AED595 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F1F19949D2500AED595 /* LoginViewController.m */; };
 		752F4F241994ACE200AED595 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F231994ACE200AED595 /* User.m */; };
 		752F4F2A1994E5CF00AED595 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F291994E5CF00AED595 /* ForgotPasswordViewController.m */; };
@@ -62,6 +63,8 @@
 		7509C5551993B70700276BD2 /* projectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "projectTests-Info.plist"; sourceTree = "<group>"; };
 		7509C5571993B70700276BD2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7509C5591993B70700276BD2 /* projectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = projectTests.m; sourceTree = "<group>"; };
+		7520BEBE199A4BAA00BB1733 /* SendLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendLocation.h; path = Model/SendLocation.h; sourceTree = "<group>"; };
+		7520BEBF199A4BAA00BB1733 /* SendLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendLocation.m; path = Model/SendLocation.m; sourceTree = "<group>"; };
 		752F4F1E19949D2500AED595 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = View/LoginViewController.h; sourceTree = "<group>"; };
 		752F4F1F19949D2500AED595 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = View/LoginViewController.m; sourceTree = "<group>"; };
 		752F4F221994ACE200AED595 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Model/User.h; sourceTree = "<group>"; };
@@ -200,6 +203,8 @@
 				752F4F231994ACE200AED595 /* User.m */,
 				752F4F30199506B100AED595 /* User+Annotation.h */,
 				752F4F31199506B100AED595 /* User+Annotation.m */,
+				7520BEBE199A4BAA00BB1733 /* SendLocation.h */,
+				7520BEBF199A4BAA00BB1733 /* SendLocation.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,6 +321,7 @@
 				752F4F2019949D2500AED595 /* LoginViewController.m in Sources */,
 				7509C5451993B70700276BD2 /* MyAplicationViewController.m in Sources */,
 				7509C53C1993B70700276BD2 /* MyAplicationAppDelegate.m in Sources */,
+				7520BEC0199A4BAA00BB1733 /* SendLocation.m in Sources */,
 				7509C5381993B70700276BD2 /* main.m in Sources */,
 				752F4F2D1995025D00AED595 /* MapViewController.m in Sources */,
 			);

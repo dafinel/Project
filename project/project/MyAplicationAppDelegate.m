@@ -7,6 +7,14 @@
 //
 
 #import "MyAplicationAppDelegate.h"
+#import "SendLocation.h"
+
+#define kBaseURL @"http://localhost:3000/"
+#define kLocations @"users"
+
+@interface MyAplicationAppDelegate()<CLLocationManagerDelegate>
+
+@end
 
 @implementation MyAplicationAppDelegate
 
@@ -14,9 +22,57 @@
 {
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
+   // SendLocation *loc = [[SendLocation alloc] init];
+    //[loc startMonitoring];
+    
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    [self.locationManager startMonitoringSignificantLocationChanges];
     // Override point for customization after application launch.
     return YES;
 }
+
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    CLLocation *location = [locations lastObject];
+    NSMutableDictionary *c = [NSMutableDictionary dictionary];
+    NSNumber *lat = [NSNumber numberWithDouble:(double)location.coordinate.latitude];
+    NSNumber *lon = [NSNumber numberWithDouble:(double)location.coordinate.longitude];
+    [c setObject:lat forKey:@"latitude"];
+    [c setObject:lon forKey:@"longitude"];
+    [self updateLocationOnServer:c];
+    [self.locationManager stopMonitoringSignificantLocationChanges];
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    
+}
+
+- (void)updateLocationOnServer:(NSDictionary *)dic {
+    NSString *udid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
+    udid = [NSString stringWithFormat:@"/%@",udid];
+    NSLog(@"%@",udid);
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"PUT";
+    NSData* data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:NULL];
+    request.HTTPBody = data;
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { //5
+        if (!error) {
+            
+        }
+    }];
+    [dataTask resume];
+    
+}
+
 							
 - (void)applicationWillResignActive:(UIApplication *)application
 {
