@@ -15,7 +15,7 @@
 #define kBaseURL @"http://localhost:3000/"
 #define kLocations @"users"
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 
 @property (weak, nonatomic  ) IBOutlet UITextField *userTextinput;
 @property (weak, nonatomic  ) IBOutlet UITextField *passwordTextInput;
@@ -31,6 +31,12 @@
     [super viewDidLoad];
     
 }
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
 
 - (void)importData {
     NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];

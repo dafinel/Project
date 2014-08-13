@@ -30,24 +30,6 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="abc" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="p9z-dx-rKZ">
-                                <rect key="frame" x="83" y="193" width="154" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="154" id="JFR-3D-qRU"/>
-                                    <constraint firstAttribute="height" constant="30" id="Sk2-Ek-gYz"/>
-                                </constraints>
-                                <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="andrei" borderStyle="roundedRect" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ne-mZ-9kT">
-                                <rect key="frame" x="82" y="231" width="157" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="textColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="italicSystem" pointSize="16"/>
-                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEo-jc-Q1O">
                                 <rect key="frame" x="87" y="269" width="152" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -83,24 +65,40 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Eum-ro-eYE">
+                                <rect key="frame" x="62" y="102" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="e5r-va-taX"/>
+                                </connections>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="E4A-yi-ymS">
+                                <rect key="frame" x="62" y="140" width="204" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="bxy-DR-emW"/>
+                                </connections>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ERo-Sm-nx1" firstAttribute="top" secondItem="qsE-bP-inf" secondAttribute="bottom" constant="8" symbolic="YES" id="6ey-aQ-AUA"/>
                             <constraint firstItem="qsE-bP-inf" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" symbolic="YES" id="HRG-EI-AGp"/>
                             <constraint firstAttribute="centerX" secondItem="qsE-bP-inf" secondAttribute="centerX" id="Kaa-YN-zxC"/>
-                            <constraint firstAttribute="centerY" secondItem="p9z-dx-rKZ" secondAttribute="centerY" id="Puw-NN-nxo"/>
                             <constraint firstAttribute="trailing" secondItem="ERo-Sm-nx1" secondAttribute="trailing" constant="20" symbolic="YES" id="SP6-El-9CS"/>
-                            <constraint firstAttribute="centerX" secondItem="p9z-dx-rKZ" secondAttribute="centerX" id="ToW-9M-Ve8"/>
                             <constraint firstItem="ERo-Sm-nx1" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="rka-k6-JEn"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="DVK-Mi-pot"/>
                     <connections>
-                        <outlet property="passwordTextInput" destination="3ne-mZ-9kT" id="rH7-iT-wHN"/>
+                        <outlet property="passwordTextInput" destination="E4A-yi-ymS" id="Zl5-q5-agN"/>
                         <outlet property="spinner" destination="aHG-bM-Kni" id="gyI-k0-e6E"/>
-                        <outlet property="userTextinput" destination="p9z-dx-rKZ" id="aqg-GL-JdU"/>
+                        <outlet property="userTextinput" destination="Eum-ro-eYE" id="hgi-Dt-neW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
