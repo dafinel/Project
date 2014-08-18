@@ -102,6 +102,25 @@ CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityI
 }
 
 
+// location History
+CollectionDriver.prototype.locationHistory = function(collectionName,obj, entityId, callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+		console.log(obj);
+		the_collection.update({'_id':ObjectID(entityId)},
+					{ $addToSet : {'location_history':obj} },
+					function(error,doc) { //C
+            				    if (error) callback(error)
+            				    else callback(null, obj);
+                });
+
+        }
+    });
+}
+
+
+
 //delete a specific object
 CollectionDriver.prototype.delete = function(collectionName, entityId, callback) {
     this.getCollection(collectionName, function(error, the_collection) { //A

@@ -13,7 +13,6 @@
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
-
 @end
 
 @implementation MapViewController
@@ -41,7 +40,7 @@
         if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
                                          initWithAnnotation:annotation reuseIdentifier:defaultPinID];
         
-        pinView.pinColor = MKPinAnnotationColorGreen;
+        pinView.pinColor = MKPinAnnotationColorPurple;
         pinView.animatesDrop = YES;
     }
     else {

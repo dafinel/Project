@@ -22,6 +22,11 @@
 		7509C5501993B70700276BD2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7509C52F1993B70700276BD2 /* UIKit.framework */; };
 		7509C5581993B70700276BD2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7509C5561993B70700276BD2 /* InfoPlist.strings */; };
 		7509C55A1993B70700276BD2 /* projectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7509C5591993B70700276BD2 /* projectTests.m */; };
+		751AC1D119A1D3230051A0F0 /* LocationHistoryMapVCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751AC1D019A1D3230051A0F0 /* LocationHistoryMapVCViewController.m */; };
+		751AC1D419A1EBA80051A0F0 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 751AC1D319A1EBA80051A0F0 /* Location.m */; };
+		751AC1DA19A1F8570051A0F0 /* FriendListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */; };
+		751AC1DD19A1FA490051A0F0 /* Friend.m in Sources */ = {isa = PBXBuildFile; fileRef = 751AC1DC19A1FA490051A0F0 /* Friend.m */; };
+		751AC1E019A21A740051A0F0 /* SeeOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 751AC1DF19A21A740051A0F0 /* SeeOnMapViewController.m */; };
 		7520BEC0199A4BAA00BB1733 /* SendLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7520BEBF199A4BAA00BB1733 /* SendLocation.m */; };
 		752F4F2019949D2500AED595 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F1F19949D2500AED595 /* LoginViewController.m */; };
 		752F4F241994ACE200AED595 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F231994ACE200AED595 /* User.m */; };
@@ -63,6 +68,16 @@
 		7509C5551993B70700276BD2 /* projectTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "projectTests-Info.plist"; sourceTree = "<group>"; };
 		7509C5571993B70700276BD2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7509C5591993B70700276BD2 /* projectTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = projectTests.m; sourceTree = "<group>"; };
+		751AC1CF19A1D3230051A0F0 /* LocationHistoryMapVCViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationHistoryMapVCViewController.h; path = View/LocationHistoryMapVCViewController.h; sourceTree = "<group>"; };
+		751AC1D019A1D3230051A0F0 /* LocationHistoryMapVCViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationHistoryMapVCViewController.m; path = View/LocationHistoryMapVCViewController.m; sourceTree = "<group>"; };
+		751AC1D219A1EBA80051A0F0 /* Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Location.h; path = Model/Location.h; sourceTree = "<group>"; };
+		751AC1D319A1EBA80051A0F0 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Location.m; path = Model/Location.m; sourceTree = "<group>"; };
+		751AC1D819A1F8570051A0F0 /* FriendListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FriendListTableViewController.h; path = View/FriendListTableViewController.h; sourceTree = "<group>"; };
+		751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FriendListTableViewController.m; path = View/FriendListTableViewController.m; sourceTree = "<group>"; };
+		751AC1DB19A1FA490051A0F0 /* Friend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Friend.h; path = Model/Friend.h; sourceTree = "<group>"; };
+		751AC1DC19A1FA490051A0F0 /* Friend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Friend.m; path = Model/Friend.m; sourceTree = "<group>"; };
+		751AC1DE19A21A740051A0F0 /* SeeOnMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeeOnMapViewController.h; path = View/SeeOnMapViewController.h; sourceTree = "<group>"; };
+		751AC1DF19A21A740051A0F0 /* SeeOnMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeeOnMapViewController.m; path = View/SeeOnMapViewController.m; sourceTree = "<group>"; };
 		7520BEBE199A4BAA00BB1733 /* SendLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SendLocation.h; path = Model/SendLocation.h; sourceTree = "<group>"; };
 		7520BEBF199A4BAA00BB1733 /* SendLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SendLocation.m; path = Model/SendLocation.m; sourceTree = "<group>"; };
 		752F4F1E19949D2500AED595 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = View/LoginViewController.h; sourceTree = "<group>"; };
@@ -192,6 +207,12 @@
 				7509C5441993B70700276BD2 /* MyAplicationViewController.m */,
 				752F4F2B1995025D00AED595 /* MapViewController.h */,
 				752F4F2C1995025D00AED595 /* MapViewController.m */,
+				751AC1CF19A1D3230051A0F0 /* LocationHistoryMapVCViewController.h */,
+				751AC1D019A1D3230051A0F0 /* LocationHistoryMapVCViewController.m */,
+				751AC1D819A1F8570051A0F0 /* FriendListTableViewController.h */,
+				751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */,
+				751AC1DE19A21A740051A0F0 /* SeeOnMapViewController.h */,
+				751AC1DF19A21A740051A0F0 /* SeeOnMapViewController.m */,
 			);
 			name = VIew;
 			sourceTree = "<group>";
@@ -205,6 +226,10 @@
 				752F4F31199506B100AED595 /* User+Annotation.m */,
 				7520BEBE199A4BAA00BB1733 /* SendLocation.h */,
 				7520BEBF199A4BAA00BB1733 /* SendLocation.m */,
+				751AC1D219A1EBA80051A0F0 /* Location.h */,
+				751AC1D319A1EBA80051A0F0 /* Location.m */,
+				751AC1DB19A1FA490051A0F0 /* Friend.h */,
+				751AC1DC19A1FA490051A0F0 /* Friend.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -316,11 +341,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				752F4F2A1994E5CF00AED595 /* ForgotPasswordViewController.m in Sources */,
+				751AC1DD19A1FA490051A0F0 /* Friend.m in Sources */,
 				752F4F32199506B100AED595 /* User+Annotation.m in Sources */,
 				752F4F241994ACE200AED595 /* User.m in Sources */,
 				752F4F2019949D2500AED595 /* LoginViewController.m in Sources */,
+				751AC1D419A1EBA80051A0F0 /* Location.m in Sources */,
+				751AC1DA19A1F8570051A0F0 /* FriendListTableViewController.m in Sources */,
+				751AC1D119A1D3230051A0F0 /* LocationHistoryMapVCViewController.m in Sources */,
 				7509C5451993B70700276BD2 /* MyAplicationViewController.m in Sources */,
 				7509C53C1993B70700276BD2 /* MyAplicationAppDelegate.m in Sources */,
+				751AC1E019A21A740051A0F0 /* SeeOnMapViewController.m in Sources */,
 				7520BEC0199A4BAA00BB1733 /* SendLocation.m in Sources */,
 				7509C5381993B70700276BD2 /* main.m in Sources */,
 				752F4F2D1995025D00AED595 /* MapViewController.m in Sources */,

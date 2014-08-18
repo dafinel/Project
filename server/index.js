@@ -93,11 +93,13 @@ app.put('/:collection/:entity', function(req, res) { //A
     var entity = params.entity; 
     var collection = params.collection;
     if (entity) {
-       collectionDriver.updateLocation(collection, req.body, entity, function(error, objs) { //B
+       collectionDriver.updateLocation(collection, req.body, entity, function(error, objs) { 
+	collectionDriver.locationHistory(collection, req.body, entity, function(error, objs) { 
           if (error) { res.send(400, error); }
           else { res.send(200, objs); } //C
+         });          
        });
-   } else {
+	   } else {
        var error = { "message" : "Cannot PUT a whole collection" };
        res.send(400, error);
    }

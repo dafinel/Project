@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "Location.h"
 
 #define safeSet(d,k,v) if (v) d[k] = v;
 
@@ -25,8 +26,9 @@
         _curentLocation = [self curentlocation:[[dictionary valueForKeyPath:@"curent_location.latitude"]doubleValue]
                 andLongitude:[[dictionary valueForKeyPath:@"curent_location.longitude"] doubleValue]];
         _friends = [NSMutableArray arrayWithArray:dictionary[@"friends"]];
-        _locationHistory = [NSMutableArray arrayWithArray:dictionary[@"location_history"]];
-        
+        [_friends addObject:@"53e8b7a041e7a0de11c18936"];
+       // _locationHistory = [NSMutableArray arrayWithArray:dictionary[@"location_history"]];
+        _locationHistory = [self createLocationHistory:dictionary[@"location_history"]];
     }
     return self;
 }
@@ -46,6 +48,18 @@
     [c setObject:lon forKey:@"latitude"];
     
     return c;
+}
+
+- (NSMutableArray *)createLocationHistory:(NSArray *)array {
+    NSMutableArray *location = [[NSMutableArray alloc] init];
+    for (NSDictionary *dic in array) {
+        Location *loc = [[Location alloc] init];
+        loc.latitude = [[dic valueForKey:@"latitude"] doubleValue];
+        loc.longitude = [[dic valueForKey:@"longitude"] doubleValue];
+        [location addObject: loc];
+    }
+
+    return location;
 }
 
 - (NSDictionary*) toDictionary
