@@ -11,6 +11,7 @@
 
 @interface Location : NSObject <MKAnnotation>
 
+@property (nonatomic,strong ) NSString *date;
 @property (nonatomic ) double latitude;
 @property (nonatomic ) double longitude;
 

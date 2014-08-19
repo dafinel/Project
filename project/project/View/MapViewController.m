@@ -21,13 +21,14 @@
 
 - (void) updateMapViewAnnotations {
     [self.mapView removeAnnotations:self.mapView.annotations];
-    [self.mapView addAnnotation:self.user];
+    //[self.mapView addAnnotation:self.user];
     [self.mapView showAnnotations:@[self.user] animated:YES];
 }
 
 - (void)setMapView:(MKMapView *)mapView {
     _mapView = mapView;
     self.mapView.delegate = self;
+    self.mapView.showsUserLocation = YES;
     [self updateMapViewAnnotations];
 }
 

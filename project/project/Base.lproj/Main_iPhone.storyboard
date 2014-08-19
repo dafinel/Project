@@ -149,11 +149,50 @@
                         <segue destination="VeV-5v-2jC" kind="relationship" relationship="viewControllers" id="YKk-n0-Xr9"/>
                         <segue destination="jeK-Za-hMr" kind="relationship" relationship="viewControllers" id="T9j-ZK-l3s"/>
                         <segue destination="JIZ-Pm-6Lr" kind="relationship" relationship="viewControllers" id="RYS-1g-SwL"/>
+                        <segue destination="rUf-zm-YEL" kind="relationship" relationship="viewControllers" id="UWt-pM-iWk"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmV-av-PHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="630" y="-224"/>
+        </scene>
+        <!--Cereri Table View Controller-->
+        <scene sceneID="wm7-On-5qe">
+            <objects>
+                <tableViewController id="rUf-zm-YEL" customClass="CereriTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="KYr-ER-84b">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cerere" textLabel="IN9-81-YUA" style="IBUITableViewCellStyleDefault" id="ro8-wl-Esk">
+                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ro8-wl-Esk" id="kx2-UE-eCk">
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IN9-81-YUA">
+                                            <rect key="frame" x="15" y="0.0" width="270" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="rUf-zm-YEL" id="tHi-pU-SGr"/>
+                            <outlet property="delegate" destination="rUf-zm-YEL" id="QI8-7s-mfF"/>
+                        </connections>
+                    </tableView>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="lYp-Ch-ZFP"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TmF-xk-JFq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113" y="485"/>
         </scene>
         <!--Location History MapVC View Controller-->
         <scene sceneID="E4p-xp-rxQ">
@@ -176,6 +215,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" systemItem="history" id="V3n-BM-77e"/>
+                    <navigationItem key="navigationItem" id="nzX-KL-BgR"/>
                     <connections>
                         <outlet property="mapView" destination="Nuy-dW-Ry3" id="vA3-Kk-RcR"/>
                     </connections>
@@ -244,11 +284,66 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" systemItem="contacts" id="Lhm-AP-EYq"/>
-                    <navigationItem key="navigationItem" id="O7n-76-qGo"/>
+                    <navigationItem key="navigationItem" id="O7n-76-qGo">
+                        <barButtonItem key="rightBarButtonItem" title="addFriend" id="fky-GC-mQc">
+                            <connections>
+                                <segue destination="bQN-oG-7jy" kind="push" id="WLR-JF-Xgn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vDK-nf-mcl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1170" y="683"/>
+        </scene>
+        <!--Addfriend View Controller - Add a new friend-->
+        <scene sceneID="63d-CS-ZVd">
+            <objects>
+                <viewController id="bQN-oG-7jy" customClass="AddfriendViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Auw-V8-J8d"/>
+                        <viewControllerLayoutGuide type="bottom" id="rL1-Lg-979"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fYj-Hf-7FL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mail:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bxD-q1-n5B">
+                                <rect key="frame" x="20" y="103" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oRT-Xq-U1d">
+                                <rect key="frame" x="71" y="100" width="229" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="bQN-oG-7jy" id="AAa-QB-DWy"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Siz-pg-7F0">
+                                <rect key="frame" x="111" y="225" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Friend">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addfiendAction:" destination="bQN-oG-7jy" eventType="touchUpInside" id="0Jb-XI-8fw"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add a new friend" id="cw7-Vg-PNs"/>
+                    <connections>
+                        <outlet property="mailTextField" destination="oRT-Xq-U1d" id="DZP-pW-lgE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E5P-zy-Wc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651" y="122"/>
         </scene>
         <!--See On Map View Controller-->
         <scene sceneID="dGp-Bz-8aS">

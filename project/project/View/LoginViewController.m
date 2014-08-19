@@ -150,7 +150,6 @@
             NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
             if ([responseArray count]) {
                // dispatch_async(dispatch_get_main_queue(), ^{
-                NSLog(@"%@",responseArray);
                    // User *user =[[User alloc] initWithDictionary:responseArray];
                 fr._id = responseArray[@"_id"];
                     fr.name = responseArray[@"name"];

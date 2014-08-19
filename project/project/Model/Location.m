@@ -9,18 +9,21 @@
 #import "Location.h"
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
-@interface Location () 
+@interface Location ()
+@property (nonatomic, readwrite) NSString *title;
 @end
 
 @implementation Location
 
 - (CLLocationCoordinate2D)coordinate {
+    self.title = self.date;
     CLLocationCoordinate2D coordinate;
     coordinate.latitude = self.latitude;
     coordinate.longitude = self.longitude;
     
     return coordinate;
 }
+
 
 
 @end

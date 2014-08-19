@@ -197,7 +197,9 @@
     region.span.latitudeDelta  = maxLat - minLat;
     region.span.longitudeDelta = maxLon - minLon;
     
-    [self.mapView setRegion:region animated:YES];
+    if(!region.center.latitude == 0) {
+        [self.mapView setRegion:region animated:YES];
+    }
 }
 
 /*

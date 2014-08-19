@@ -14,6 +14,8 @@
 
 @interface MyAplicationAppDelegate()<CLLocationManagerDelegate>
 
+@property (nonatomic, strong) CLLocation *lastLocation;
+
 @end
 
 @implementation MyAplicationAppDelegate
@@ -30,7 +32,7 @@
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
     // Override point for customization after application launch.
     return YES;
 }
@@ -39,21 +41,26 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     CLLocation *location = [locations lastObject];
-    NSMutableDictionary *c = [NSMutableDictionary dictionary];
-    NSNumber *lat = [NSNumber numberWithDouble:(double)location.coordinate.latitude];
-    NSNumber *lon = [NSNumber numberWithDouble:(double)location.coordinate.longitude];
-    [c setObject:lat forKey:@"latitude"];
-    [c setObject:lon forKey:@"longitude"];
-    [self updateLocationOnServer:c];
-    [self.locationManager stopMonitoringSignificantLocationChanges];
-    [self.locationManager startMonitoringSignificantLocationChanges];
+    if (![location isEqual:self.lastLocation]) {
+        self.lastLocation = location;
+        NSMutableDictionary *c = [NSMutableDictionary dictionary];
+        NSNumber *lat = [NSNumber numberWithDouble:(double)location.coordinate.latitude];
+        NSNumber *lon = [NSNumber numberWithDouble:(double)location.coordinate.longitude];
+        NSString *data = [NSString stringWithFormat:@"%@",[NSDate date]];
+        [c setObject:lat forKey:@"latitude"];
+        [c setObject:lon forKey:@"longitude"];
+        [c setObject:data forKey:@"date"];
+        [self updateLocationOnServer:c];
+        [self.locationManager startUpdatingLocation];
+        [self.locationManager stopUpdatingLocation];
+    }
+    
     
 }
 
 - (void)updateLocationOnServer:(NSDictionary *)dic {
     NSString *udid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
     udid = [NSString stringWithFormat:@"/%@",udid];
-    NSLog(@"%@",udid);
     NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
     url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
     NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];

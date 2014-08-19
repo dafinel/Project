@@ -25,8 +25,8 @@
         _mail = dictionary[@"mail"];
         _curentLocation = [self curentlocation:[[dictionary valueForKeyPath:@"curent_location.latitude"]doubleValue]
                 andLongitude:[[dictionary valueForKeyPath:@"curent_location.longitude"] doubleValue]];
-        _friends = [NSMutableArray arrayWithArray:dictionary[@"friends"]];
-        [_friends addObject:@"53e8b7a041e7a0de11c18936"];
+        //_friends = [NSMutableArray arrayWithArray:dictionary[@"friends"]];
+        _friends = [self createFriendsList:dictionary[@"friends"]];
        // _locationHistory = [NSMutableArray arrayWithArray:dictionary[@"location_history"]];
         _locationHistory = [self createLocationHistory:dictionary[@"location_history"]];
     }
@@ -56,10 +56,23 @@
         Location *loc = [[Location alloc] init];
         loc.latitude = [[dic valueForKey:@"latitude"] doubleValue];
         loc.longitude = [[dic valueForKey:@"longitude"] doubleValue];
+        loc.date = [NSString stringWithFormat: @"%@",[dic valueForKey:@"date"]];
         [location addObject: loc];
     }
 
     return location;
+}
+
+- (NSMutableArray *)createFriendsList:(NSArray *)array {
+    NSMutableArray *friends =[NSMutableArray array];
+    for (NSDictionary *dic in array) {
+        if ([[dic valueForKey:@"accepted"]isEqualToString:@"yes"]) {
+            [friends addObject:[dic valueForKey:@"_id"]];
+        }
+    }
+
+    
+    return friends;
 }
 
 - (NSDictionary*) toDictionary

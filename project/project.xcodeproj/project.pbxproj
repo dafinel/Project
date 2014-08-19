@@ -34,6 +34,8 @@
 		752F4F2D1995025D00AED595 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F2C1995025D00AED595 /* MapViewController.m */; };
 		752F4F2F199502ED00AED595 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F4F2E199502ED00AED595 /* MapKit.framework */; };
 		752F4F32199506B100AED595 /* User+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F31199506B100AED595 /* User+Annotation.m */; };
+		75AA4EC019A3382E003A5BE5 /* AddfriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */; };
+		75AA4EC319A3785D003A5BE5 /* CereriTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AA4EC219A3785D003A5BE5 /* CereriTableViewController.m */; };
 		75B3F8A41998FCEA00CCB930 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +93,10 @@
 		752F4F2E199502ED00AED595 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		752F4F30199506B100AED595 /* User+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Annotation.h"; path = "Model/User+Annotation.h"; sourceTree = "<group>"; };
 		752F4F31199506B100AED595 /* User+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Annotation.m"; path = "Model/User+Annotation.m"; sourceTree = "<group>"; };
+		75AA4EBE19A3382E003A5BE5 /* AddfriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddfriendViewController.h; path = View/AddfriendViewController.h; sourceTree = "<group>"; };
+		75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddfriendViewController.m; path = View/AddfriendViewController.m; sourceTree = "<group>"; };
+		75AA4EC119A3785D003A5BE5 /* CereriTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CereriTableViewController.h; path = View/CereriTableViewController.h; sourceTree = "<group>"; };
+		75AA4EC219A3785D003A5BE5 /* CereriTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CereriTableViewController.m; path = View/CereriTableViewController.m; sourceTree = "<group>"; };
 		75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -213,6 +219,10 @@
 				751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */,
 				751AC1DE19A21A740051A0F0 /* SeeOnMapViewController.h */,
 				751AC1DF19A21A740051A0F0 /* SeeOnMapViewController.m */,
+				75AA4EBE19A3382E003A5BE5 /* AddfriendViewController.h */,
+				75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */,
+				75AA4EC119A3785D003A5BE5 /* CereriTableViewController.h */,
+				75AA4EC219A3785D003A5BE5 /* CereriTableViewController.m */,
 			);
 			name = VIew;
 			sourceTree = "<group>";
@@ -347,6 +357,7 @@
 				752F4F2019949D2500AED595 /* LoginViewController.m in Sources */,
 				751AC1D419A1EBA80051A0F0 /* Location.m in Sources */,
 				751AC1DA19A1F8570051A0F0 /* FriendListTableViewController.m in Sources */,
+				75AA4EC319A3785D003A5BE5 /* CereriTableViewController.m in Sources */,
 				751AC1D119A1D3230051A0F0 /* LocationHistoryMapVCViewController.m in Sources */,
 				7509C5451993B70700276BD2 /* MyAplicationViewController.m in Sources */,
 				7509C53C1993B70700276BD2 /* MyAplicationAppDelegate.m in Sources */,
@@ -354,6 +365,7 @@
 				7520BEC0199A4BAA00BB1733 /* SendLocation.m in Sources */,
 				7509C5381993B70700276BD2 /* main.m in Sources */,
 				752F4F2D1995025D00AED595 /* MapViewController.m in Sources */,
+				75AA4EC019A3382E003A5BE5 /* AddfriendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -101,6 +101,26 @@ CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityI
     });
 }
 
+//cerere prietenie
+
+CollectionDriver.prototype.cerere = function(collectionName,entityId,mail, callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+		var obj = the_collection.findOne({'mail':mail},function(error,obj) {
+                 
+			the_collection.update({'_id':ObjectID(entityId)},
+					{ $addToSet : {'friends':{'_id':obj._id.valueOf(),'accepted':'no'}} },
+					function(error,doc) { //C
+            				    if (error) callback(error)
+            				    else callback(null, obj);
+                 });
+		
+                });
+
+        }
+    });
+}
 
 // location History
 CollectionDriver.prototype.locationHistory = function(collectionName,obj, entityId, callback) {

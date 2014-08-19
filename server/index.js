@@ -88,6 +88,19 @@ app.post('/:collection', function(req, res) { //A
      });
 });
 
+app.put('/:collection/:id/:mail', function(req, res) { //A
+    var collection = req.params.collection;
+    var id = req.params.id;
+    var mail = req.params.mail;
+    collectionDriver.cerere(collection,id,mail, function(error, objs) { 
+          if (error) { res.send(400, error); }
+          else { res.send(200, objs); } //C
+         });          
+
+
+});
+
+
 app.put('/:collection/:entity', function(req, res) { //A
     var params = req.params;
     var entity = params.entity; 
@@ -112,7 +125,7 @@ app.delete('/:collection/:entity', function(req, res) { //A
     var params = req.params;
     var entity = params.entity;
     var collection = params.collection;
-    if (id) {
+    if (entity) {
        collectionDriver.delete(collection, entity, function(error, objs) { //B
           if (error) { res.send(400, error); }
           else { res.send(200, objs); } //C 200 b/c includes the original doc

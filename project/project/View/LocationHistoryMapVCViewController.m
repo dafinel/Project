@@ -19,32 +19,36 @@
 - (void) updateMapViewAnnotations {
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView addAnnotations:self.user.locationHistory];
-    [self.mapView showAnnotations:@[self.user] animated:YES];
+    [self.mapView showAnnotations:self.user.locationHistory animated:YES];
 }
 
 - (void)setMapView:(MKMapView *)mapView {
     _mapView = mapView;
     self.mapView.delegate = self;
-    
+    self.mapView.showsUserLocation = YES;
     [self updateMapViewAnnotations];
 }
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKPinAnnotationView *pinView = nil;
+    MKAnnotationView *pinView = nil;
     if(annotation != mapView.userLocation)
     {
         static NSString *defaultPinID = @"com.invasivecode.pin";
         pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
                                          initWithAnnotation:annotation reuseIdentifier:defaultPinID];
-        
-        pinView.pinColor = MKPinAnnotationColorGreen;
-        pinView.animatesDrop = YES;
+       // pinView.animatesDrop = YES;
+        pinView.canShowCallout = YES;
+        pinView.annotation = annotation;
     }
     else {
         [mapView.userLocation setTitle:@"I am here"];
     }
     
     return pinView;
+}
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+    
 }
 
 /*
