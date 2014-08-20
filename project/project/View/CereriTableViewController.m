@@ -25,13 +25,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
+//#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
-}
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    
+    return [self.cereri count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -39,10 +35,27 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cerere" forIndexPath:indexPath];
     
     // Configure the cell...
+    NSDictionary *cerere = self.cereri[indexPath.row];
+    cell.textLabel.text = cerere[@"name"];
+    UIButton *but = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    but.frame = CGRectMake(cell.frame.size.width - 70 , cell.frame.origin.y, 70, 44);
+    [but setTitle:@"Accept" forState:UIControlStateNormal];
+    [but setBackgroundColor:[UIColor clearColor]];
+    [but addTarget:self action:@selector(acceptAction) forControlEvents:UIControlEventTouchUpInside];
+    [cell.contentView addSubview:but];
     
+    
+    
+   
+    
+    
+
     return cell;
 }
 
+- (void)acceptAction {
+    
+}
 
 /*
 // Override to support conditional editing of the table view.

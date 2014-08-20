@@ -89,7 +89,7 @@ CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityI
     this.getCollection(collectionName, function(error, the_collection) {
         if (error) callback(error)
         else {
-		console.log(obj);
+		
 		the_collection.update({'_id':ObjectID(entityId)},
 					{ $set : {'curent_location':obj} },
 					function(error,doc) { //C
@@ -100,6 +100,47 @@ CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityI
         }
     });
 }
+//accept friendship
+
+CollectionDriver.prototype.accept = function(collectionName,idprieten,id,ok, callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+		
+	      if(ok == "yes")
+	      {		
+		 the_collection.update({'_id':ObjectID(id)},
+					{ $addToSet : {'friends':{'_id':ObjectID(idprieten),'accepted':'yes'}} },
+					function(error,doc) { 
+
+						
+						the_collection.update({'_id':ObjectID(idprieten)},
+ 									{$pull:{'friends':{'_id':id.toString(),'accepted':'no'}}},
+									function(error,doc) {
+										the_collection.update({'_id':ObjectID(idprieten)},
+ 													{$addToSet:{'friends':{'_id':id,'accepted':'yes'}}},
+													function(error,doc) {
+													       the_collection.update({'_id':ObjectID(id)},
+																    {$pull:{'cereri':{'_id':idprieten}}},
+																    function(error,doc) {		
+																	if (error) callback(error)
+            				    												else callback(null,doc);
+																	}
+														);
+										});
+									});
+						
+					}
+					);
+	      }	
+
+        }
+    });
+}
+
+
+
+
 
 //cerere prietenie
 
@@ -108,13 +149,25 @@ CollectionDriver.prototype.cerere = function(collectionName,entityId,mail, callb
         if (error) callback(error)
         else {
 		var obj = the_collection.findOne({'mail':mail},function(error,obj) {
+
+			var person = the_collection.findOne({'_id':ObjectID(entityId)},function(error,person) {
                  
 			the_collection.update({'_id':ObjectID(entityId)},
 					{ $addToSet : {'friends':{'_id':obj._id.valueOf(),'accepted':'no'}} },
 					function(error,doc) { //C
-            				    if (error) callback(error)
-            				    else callback(null, obj);
-                 });
+					  console.log(person);
+
+					   the_collection.update({'_id':obj._id},
+					        {$addToSet: { 'cereri':{'_id': entityId,'name':person.name}
+							   }
+					    },function(error,doc) {
+						if (error) callback(error)
+            				    else callback(null,obj);
+						} );
+            				    
+			
+                 			});
+			});	
 		
                 });
 

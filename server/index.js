@@ -101,6 +101,21 @@ app.put('/:collection/:id/:mail', function(req, res) { //A
 });
 
 
+app.put('/:collection/:accept/:idprieten/:id', function(req, res) { //A
+    var collection = req.params.collection;
+    var accept = req.params.accept;
+    var id = req.params.id;
+    var idprieten = req.params.idprieten;
+    collectionDriver.accept(collection,idprieten,id,accept, function(error, objs) { 
+	  console.log(objs);
+          if (error) { res.send(400, error); }
+          else { res.send(200, objs); } //C
+         });          
+
+
+});
+
+
 app.put('/:collection/:entity', function(req, res) { //A
     var params = req.params;
     var entity = params.entity; 

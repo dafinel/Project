@@ -14,6 +14,7 @@
 #import "LocationHistoryMapVCViewController.h"
 #import "FriendListTableViewController.h"
 #import "Friend.h"
+#import "CereriTableViewController.h"
 
 
 #define kBaseURL @"http://localhost:3000/"
@@ -119,6 +120,15 @@
                  myvc.user = self.user;
              }
          }
+         if ([tbvc.viewControllers[3] isKindOfClass:[UINavigationController class]]) {
+             id detail = [((UINavigationController *)tbvc.viewControllers[3]).viewControllers firstObject];
+             if ([detail isKindOfClass:[CereriTableViewController class]]) {
+                 CereriTableViewController *myvc = (CereriTableViewController *)detail;
+                 myvc.cereri = self.user.cereri;
+                 
+             }
+         }
+
          
      }
     }

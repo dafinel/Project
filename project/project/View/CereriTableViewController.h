@@ -10,4 +10,6 @@
 
 @interface CereriTableViewController : UITableViewController
 
+@property (nonatomic, strong) NSArray *cereri;
+
 @end

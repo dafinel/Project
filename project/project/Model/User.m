@@ -29,6 +29,7 @@
         _friends = [self createFriendsList:dictionary[@"friends"]];
        // _locationHistory = [NSMutableArray arrayWithArray:dictionary[@"location_history"]];
         _locationHistory = [self createLocationHistory:dictionary[@"location_history"]];
+        _cereri = [NSArray arrayWithArray:dictionary[@"cereri"]];
     }
     return self;
 }
