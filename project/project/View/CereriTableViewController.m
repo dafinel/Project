@@ -5,8 +5,10 @@
 //  Created by Andrei-Daniel Anton on 19/08/14.
 //  Copyright (c) 2014 Andrei-Daniel Anton. All rights reserved.
 //
-
 #import "CereriTableViewController.h"
+
+#define kBaseURL @"http://localhost:3000/"
+#define kLocations @"users"
 
 @interface CereriTableViewController ()
 
@@ -37,6 +39,7 @@
     // Configure the cell...
     NSDictionary *cerere = self.cereri[indexPath.row];
     cell.textLabel.text = cerere[@"name"];
+    [[NSUserDefaults standardUserDefaults]setValue:cerere forKey:@"idprieten"];
     UIButton *but = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     but.frame = CGRectMake(cell.frame.size.width - 70 , cell.frame.origin.y, 70, 44);
     [but setTitle:@"Accept" forState:UIControlStateNormal];
@@ -54,6 +57,29 @@
 }
 
 - (void)acceptAction {
+    NSString *udid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults]dictionaryForKey:@"idprieten"];
+    NSString *idprieten = [NSString stringWithFormat:@"%@",dic[@"_id"]];
+    udid = [NSString stringWithFormat:@"/yes/%@/%@",idprieten,udid];
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"PUT";
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { //5
+        if (!error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.cereri removeObject:dic];
+            [self.tableView reloadData];
+        });
+        }
+    }];
+    [dataTask resume];
+    
+
     
 }
 

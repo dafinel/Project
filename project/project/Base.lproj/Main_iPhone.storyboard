@@ -170,7 +170,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SCi-E6-fVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-387" y="485"/>
+            <point key="canvasLocation" x="-407" y="485"/>
         </scene>
         <!--Cereri Table View Controller-->
         <scene sceneID="wm7-On-5qe">

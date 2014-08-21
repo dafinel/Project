@@ -83,6 +83,41 @@ CollectionDriver.prototype.update = function(collectionName, obj, entityId, call
     });
 }
 
+// add meeting
+
+CollectionDriver.prototype.addMeeting = function(collectionName,object,callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+	       the_collection.update({'_id':ObjectID(object.me)},
+					{ $addToSet : {'meetings':{'with':object.with,
+								   'lat':object.lat,
+								   'lon':object.lon
+								  }
+						      }
+    					 },
+					function(error,doc) {
+            				    the_collection.update({'_id':ObjectID(object.with)},
+								  { $addToSet : {'meetings':{'with':object.me,
+								   				'lat':object.lat,
+								   				'lon':object.lon
+								  			    }
+						      				}
+    					 			  },
+								 function(error,doc) {
+            				    				if (error) callback(error)
+            				    				else callback(null,doc);
+                						 }
+					    );	
+                			}
+		);
+
+          }
+    });
+}
+
+
+
 //update location
 
 CollectionDriver.prototype.updateLocation = function(collectionName,obj, entityId, callback) {
@@ -155,7 +190,7 @@ CollectionDriver.prototype.cerere = function(collectionName,entityId,mail, callb
 			the_collection.update({'_id':ObjectID(entityId)},
 					{ $addToSet : {'friends':{'_id':obj._id.valueOf(),'accepted':'no'}} },
 					function(error,doc) { //C
-					  console.log(person);
+					  console.log(obj);
 
 					   the_collection.update({'_id':obj._id},
 					        {$addToSet: { 'cereri':{'_id': entityId,'name':person.name}

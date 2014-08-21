@@ -12,6 +12,9 @@
 #import "Friend.h"
 #import "Location.h"
 
+#define kBaseURL @"http://localhost:3000/"
+#define kLocations @"users"
+
 @interface SeeOnMapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrRoutePoints;
@@ -35,6 +38,11 @@
     self.mapView.showsUserLocation = YES;
     //[self updateMapViewAnnotations];
     
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
+                                          initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.minimumPressDuration = 2.0; //user needs to press for 2 seconds
+    [self.mapView addGestureRecognizer:lpgr];
+    
     
     CLLocationCoordinate2D loc1 = self.user.curentLocation;
     Location *origin = [[Location alloc] init];
@@ -53,8 +61,8 @@
     destination.longitude = loc2.longitude;
     [self.mapView addAnnotation:destination];
     
-    if(_arrRoutePoints) // Remove all annotations
-        [self.mapView removeAnnotations:[self.mapView annotations]];
+   // if(_arrRoutePoints) // Remove all annotations
+      //  [self.mapView removeAnnotations:[self.mapView annotations]];
     
     self.arrRoutePoints = [self getRoutePointFrom:origin to:destination];
     [self drawRoute];
@@ -62,10 +70,65 @@
  
 }
 
+- (void)handleLongPress:(UIGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan)
+        return;
+    
+    CGPoint touchPoint = [gestureRecognizer locationInView:self.mapView];
+    CLLocationCoordinate2D touchMapCoordinate =
+    [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    
+    MKPointAnnotation *annot = [[MKPointAnnotation alloc] init];
+    annot.coordinate = touchMapCoordinate;
+    [self.mapView addAnnotation:annot];
+    [self.mapView showAnnotations:@[annot] animated:YES];
+   
+    
+}
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     MKPinAnnotationView *pinView = nil;
+    
     if(annotation != mapView.userLocation)
     {
+        if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+            static NSString *defaultPinID = @"com.invasivecode.pin";
+            pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+            if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
+                                             initWithAnnotation:annotation reuseIdentifier:defaultPinID];
+            
+            pinView.pinColor = MKPinAnnotationColorGreen;
+            pinView.animatesDrop = YES;
+            pinView.canShowCallout = YES;
+            
+            
+            CLLocationCoordinate2D loc1 = self.user.curentLocation;
+            Location *origin = [[Location alloc] init];
+            origin.latitude = loc1.latitude;
+            origin.longitude = loc1.longitude;
+            
+            Friend *fr = [[Friend alloc] init];
+            fr = [self.friends firstObject];
+            [[NSUserDefaults standardUserDefaults] setValue:fr._id forKey:@"idPrietenToMeet"];
+            CLLocationCoordinate2D loc2 = annotation.coordinate;
+            Location *destination = [[Location alloc] init];
+            destination.latitude = loc2.latitude;
+            destination.longitude = loc2.longitude;
+            destination.date = [NSString stringWithFormat:@"Meet with %@",fr.name];
+            NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+            [dic setValue:@(destination.latitude) forKey:@"lat"];
+            [dic setValue:@(destination.longitude) forKey:@"lon"];
+            [[NSUserDefaults standardUserDefaults] setValue:dic forKey:@"pinlocation"];
+            
+          
+            self.arrRoutePoints = [self getRoutePointFrom:origin to:destination];
+            [self drawRoute];
+            [self centerMap];
+            [self sendToServerMeeting];
+
+
+        }
         static NSString *defaultPinID = @"com.invasivecode.pin";
         pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
@@ -73,12 +136,48 @@
         
         pinView.pinColor = MKPinAnnotationColorPurple;
         pinView.animatesDrop = YES;
+        pinView.canShowCallout = YES;
     }
     else {
         [mapView.userLocation setTitle:@"I am here"];
     }
     
     return pinView;
+}
+
+- (void)sendToServerMeeting {
+    
+    NSString *myid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
+    NSString *idprieten = [[NSUserDefaults standardUserDefaults]stringForKey:@"idPrietenToMeet"];
+    NSDictionary *loc = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"pinlocation"];
+    NSString * udid = [NSString stringWithFormat:@"/meet"];
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
+    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"PUT";
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:idprieten forKey:@"with"];
+    [dic setValue:myid forKey:@"me"];
+    [dic setValue:loc[@"lat"] forKey:@"lat"];
+    [dic setValue:loc[@"lon"] forKey:@"lon"];
+    
+    NSData* data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:NULL];
+    request.HTTPBody = data;
+    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { //5
+        if (!error) {
+           // dispatch_async(dispatch_get_main_queue(), ^{
+                
+           // });
+        }
+    }];
+    [dataTask resume];
+    
+
+    
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {

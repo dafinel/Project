@@ -18,7 +18,7 @@
 @property (nonatomic,       ) CLLocationCoordinate2D curentLocation;
 @property (nonatomic, strong) NSMutableArray *friends; //array of NSStrings _id
 @property (nonatomic, strong) NSMutableArray *locationHistory;
-@property (nonatomic, strong) NSArray *cereri;//array of NSDictionary
+@property (nonatomic, strong) NSMutableArray *cereri;//array of NSDictionary
 
 - (instancetype) initWithDictionary:(NSDictionary*)dictionary;
 - (NSDictionary*) toDictionary;
