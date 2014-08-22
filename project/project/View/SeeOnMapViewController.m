@@ -15,10 +15,12 @@
 #define kBaseURL @"http://localhost:3000/"
 #define kLocations @"users"
 
-@interface SeeOnMapViewController () <MKMapViewDelegate>
-@property (weak, nonatomic) IBOutlet MKMapView *mapView;
+@interface SeeOnMapViewController () <MKMapViewDelegate , UIAlertViewDelegate>
+@property (weak, nonatomic  ) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrRoutePoints;
 @property (nonatomic, strong) MKPolyline *objPolyline;
+@property (nonatomic        ) BOOL alertshow;
+@property (nonatomic, strong) NSDate *alertViewDate;
 
 @end
 
@@ -36,6 +38,7 @@
     _mapView = mapView;
     self.mapView.delegate = self;
     self.mapView.showsUserLocation = YES;
+    self.alertshow = NO;
     //[self updateMapViewAnnotations];
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc]
@@ -147,37 +150,77 @@
 
 - (void)sendToServerMeeting {
     
-    NSString *myid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
-    NSString *idprieten = [[NSUserDefaults standardUserDefaults]stringForKey:@"idPrietenToMeet"];
-    NSDictionary *loc = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"pinlocation"];
-    NSString * udid = [NSString stringWithFormat:@"/meet"];
-    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
-    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
-    NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
-    request.HTTPMethod = @"PUT";
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:idprieten forKey:@"with"];
-    [dic setValue:myid forKey:@"me"];
-    [dic setValue:loc[@"lat"] forKey:@"lat"];
-    [dic setValue:loc[@"lon"] forKey:@"lon"];
-    
-    NSData* data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:NULL];
-    request.HTTPBody = data;
-    [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
-    
-    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { //5
-        if (!error) {
-           // dispatch_async(dispatch_get_main_queue(), ^{
-                
-           // });
-        }
-    }];
-    [dataTask resume];
-    
+    //alert to enter date
+    if (!self.alertshow) {
+        self.alertshow = YES;
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Meeting" message:@"select date for meeting" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:@"ok", nil];
+        UIDatePicker *pickerView = [[UIDatePicker alloc] initWithFrame:CGRectMake(av.bounds.origin.x+5, av.bounds.origin.y, av.bounds.size.width - 15, av.bounds.size.height - 20)];
+        pickerView.datePickerMode = UIDatePickerModeDateAndTime;
+        pickerView.hidden = NO;
+        pickerView.date = [NSDate date];
+        [pickerView addTarget:self action:@selector(updateTime:) forControlEvents:UIControlEventValueChanged];
+        [pickerView sizeToFit];
+        [av setValue:pickerView forKey:@"accessoryView"];
+        [av show];
 
+    }
     
+    
+    
+}
+
+- (void)updateTime:(id)sender {
+     UIDatePicker *picker = (UIDatePicker*)sender;
+     self.alertViewDate = picker.date;
+    NSLog(@"%@",self.alertViewDate);
+}
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 0)
+    {
+        
+    }
+    else if(buttonIndex == 1)
+    {
+        
+        NSString *myid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
+        NSString *idprieten = [[NSUserDefaults standardUserDefaults]stringForKey:@"idPrietenToMeet"];
+        NSDictionary *loc = [[NSUserDefaults standardUserDefaults] dictionaryForKey:@"pinlocation"];
+        NSString * udid = [NSString stringWithFormat:@"/meet"];
+        NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+        url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
+        NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:url];
+        request.HTTPMethod = @"PUT";
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        [dic setValue:idprieten forKey:@"with"];
+        [dic setValue:myid forKey:@"me"];
+        [dic setValue:loc[@"lat"] forKey:@"lat"];
+        [dic setValue:loc[@"lon"] forKey:@"lon"];
+       // NSString *alertdate = [NSString stringWithFormat:@"%f",self.alertViewDate.timeIntervalSince1970];
+        double alertdate = self.alertViewDate.timeIntervalSince1970;
+        [dic setValue:@(alertdate) forKey:@"date"];
+        
+        NSData* data = [NSJSONSerialization dataWithJSONObject:dic options:0 error:NULL];
+        request.HTTPBody = data;
+        [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+        NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+        
+        NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) { //5
+            if (!error) {
+                // dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // });
+            }
+        }];
+        [dataTask resume];
+        self.alertshow = NO;
+        
+
+
+        
+    }
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {

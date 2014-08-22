@@ -165,6 +165,17 @@ app.delete('/:collection/:entity', function(req, res) { //A
        res.send(400, error);
    }
 });
+
+
+setInterval(function(){
+  var collection = "users";
+  collectionDriver.deleteMeetings(collection,function(error, objs) { //B
+          if (error) { res.send(400, error); }
+          else { res.send(200, objs); } //C 200 b/c includes the original doc
+       });
+
+  
+}, 20*1000);     
  
 app.use(function (req,res) {
     res.render('404', {url:req.url});

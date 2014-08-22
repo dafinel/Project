@@ -92,7 +92,8 @@ CollectionDriver.prototype.addMeeting = function(collectionName,object,callback)
 	       the_collection.update({'_id':ObjectID(object.me)},
 					{ $addToSet : {'meetings':{'with':object.with,
 								   'lat':object.lat,
-								   'lon':object.lon
+								   'lon':object.lon,
+								   'date':new Date(object.date*1000)
 								  }
 						      }
     					 },
@@ -100,7 +101,8 @@ CollectionDriver.prototype.addMeeting = function(collectionName,object,callback)
             				    the_collection.update({'_id':ObjectID(object.with)},
 								  { $addToSet : {'meetings':{'with':object.me,
 								   				'lat':object.lat,
-								   				'lon':object.lon
+								   				'lon':object.lon,
+												'date':new Date(object.date*1000)
 								  			    }
 						      				}
     					 			  },
@@ -116,7 +118,38 @@ CollectionDriver.prototype.addMeeting = function(collectionName,object,callback)
     });
 }
 
+//delete meetings 
 
+CollectionDriver.prototype.deleteMeetings = function(collectionName,callback) {
+    this.getCollection(collectionName, function(error, the_collection) {
+        if (error) callback(error)
+        else {
+		the_collection.find({}, function(err, resultCursor) {
+  				function processItem(err, item) {
+   				 if(item === null) {
+      					return; // All done!
+    				} else {
+				      the_collection.update({'_id':item._id},
+							   {$pull:{'meetings':{'date':{ $lte: Date()}}}},
+ 								function(error,doc) {
+            				    				
+                						 }
+				      );	
+ 				}
+
+    				//externalAsyncFunction(item, function(err) {
+								
+      					resultCursor.nextObject(processItem);
+    				//});
+
+  				}
+
+  			resultCursor.nextObject(processItem);
+			}); 
+
+          }
+    });
+}
 
 //update location
 
