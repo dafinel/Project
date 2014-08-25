@@ -12,7 +12,8 @@
 #import "Friend.h"
 #import "Location.h"
 
-#define kBaseURL @"http://localhost:3000/"
+//#define kBaseURL @"http://localhost:3000/"
+#define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
 #define kLocations @"users"
 
 @interface SeeOnMapViewController () <MKMapViewDelegate , UIAlertViewDelegate>

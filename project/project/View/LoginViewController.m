@@ -17,7 +17,9 @@
 #import "CereriTableViewController.h"
 
 
-#define kBaseURL @"http://localhost:3000/"
+//#define kBaseURL @"http://localhost:3000/"
+#define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
+
 #define kLocations @"users"
 
 @interface LoginViewController () <UITextFieldDelegate>
@@ -48,11 +50,11 @@
     url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:self.userAndPassword]];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     request.HTTPMethod = @"GET";
-    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+   // [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type:"];
+   
     NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
     [config setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
     NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
-    //NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
     NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error == nil) {
             NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];

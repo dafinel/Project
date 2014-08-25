@@ -156,11 +156,11 @@
             </objects>
             <point key="canvasLocation" x="582" y="-214"/>
         </scene>
-        <!--Navigation Controller - Item-->
+        <!--Navigation Controller - CereriPrietenie-->
         <scene sceneID="cSX-yK-zQn">
             <objects>
                 <navigationController definesPresentationContext="YES" id="a5q-At-mUa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="m4h-sL-F1t"/>
+                    <tabBarItem key="tabBarItem" title="CereriPrietenie" id="m4h-sL-F1t"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mow-mX-STm">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
