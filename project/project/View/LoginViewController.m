@@ -15,6 +15,7 @@
 #import "FriendListTableViewController.h"
 #import "Friend.h"
 #import "CereriTableViewController.h"
+#import "MeetingsTableViewController.h"
 
 
 //#define kBaseURL @"http://localhost:3000/"
@@ -130,6 +131,15 @@
                  
              }
          }
+         if ([tbvc.viewControllers[4] isKindOfClass:[UINavigationController class]]) {
+             id detail = [((UINavigationController *)tbvc.viewControllers[4]).viewControllers firstObject];
+             if ([detail isKindOfClass:[MeetingsTableViewController class]]) {
+                 MeetingsTableViewController *myvc = (MeetingsTableViewController *)detail;
+                 myvc.meetings = self.user.meetings;
+                 
+             }
+         }
+
 
          
      }
@@ -179,8 +189,6 @@
             }
         }
     }];
-    
-    // NSURLSessionDataTask *dataTask = [session dataTaskWithURL: url];
     
     [dataTask resume];
     while (!ok) {

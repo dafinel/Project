@@ -9,6 +9,11 @@
 #import "User.h"
 #import "Location.h"
 
+
+//#define kBaseURL @"http://localhost:3000/"
+#define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
+#define kLocations @"users"
+
 #define safeSet(d,k,v) if (v) d[k] = v;
 
 @implementation User
@@ -30,6 +35,7 @@
        // _locationHistory = [NSMutableArray arrayWithArray:dictionary[@"location_history"]];
         _locationHistory = [self createLocationHistory:dictionary[@"location_history"]];
         _cereri = [NSMutableArray arrayWithArray:dictionary[@"cereri"]];
+        _meetings = [self createMeetings:dictionary[@"meetings"]];
     }
     return self;
 }
@@ -49,6 +55,17 @@
     [c setObject:lon forKey:@"latitude"];
     
     return c;
+}
+
+- (NSMutableArray *)createMeetings:(NSArray *)array {
+    NSMutableArray *meetings =[[NSMutableArray alloc]init];
+    for (NSDictionary *dic in array) {
+        NSMutableDictionary *dictionary = [dic mutableCopy];
+        NSString *friendName = [self getFriendName:dic[@"with"]];
+        [dictionary setObject:friendName forKey:@"with"];
+        [meetings addObject:dictionary];
+    }
+    return meetings;
 }
 
 - (NSMutableArray *)createLocationHistory:(NSArray *)array {
@@ -88,6 +105,46 @@
     safeSet(jsonable, @"_id", self._id);
     return jsonable;
 }
+
+- (NSString *)getFriendName:(NSString *)s {
+   __block NSMutableString *friendName;
+    __block BOOL ok = NO;
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"/%@",s]]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    [config setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    //NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            if ([responseArray count]) {
+                // dispatch_async(dispatch_get_main_queue(), ^{
+                // User *user =[[User alloc] initWithDictionary:responseArray];
+               
+                friendName = responseArray[@"name"];
+                ok = YES;
+                // });
+                
+                
+                
+            } else {
+                //error;
+                
+            }
+        }
+    }];
+    
+    [dataTask resume];
+    while (!ok) {
+        
+    }
+    return friendName;
+}
+
 
 
 

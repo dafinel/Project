@@ -150,6 +150,7 @@
                         <segue destination="jeK-Za-hMr" kind="relationship" relationship="viewControllers" id="T9j-ZK-l3s"/>
                         <segue destination="JIZ-Pm-6Lr" kind="relationship" relationship="viewControllers" id="RYS-1g-SwL"/>
                         <segue destination="a5q-At-mUa" kind="relationship" relationship="viewControllers" id="Xhc-xM-NW9"/>
+                        <segue destination="xby-hc-fdC" kind="relationship" relationship="viewControllers" id="PPn-2L-vFJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmV-av-PHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -363,6 +364,98 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E5P-zy-Wc8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1651" y="122"/>
+        </scene>
+        <!--Meetings Table View Controller - Meetings-->
+        <scene sceneID="dcf-HB-ULo">
+            <objects>
+                <tableViewController id="pUn-hc-7kX" customClass="MeetingsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="x7o-2R-tQY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Meeting Cell" textLabel="Eie-tC-GoS" detailTextLabel="Qhq-kz-sTU" style="IBUITableViewCellStyleSubtitle" id="R2h-Ng-ioO">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R2h-Ng-ioO" id="dft-3j-CBr">
+                                    <rect key="frame" x="0.0" y="0.0" width="273" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eie-tC-GoS">
+                                            <rect key="frame" x="15" y="3" width="34" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qhq-kz-sTU">
+                                            <rect key="frame" x="15" y="25" width="43" height="15"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="tpi-M2-Aaz" kind="push" identifier="meeting on map" trigger="accessoryAction" id="D8G-jd-lCf"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pUn-hc-7kX" id="1KC-DC-0lD"/>
+                            <outlet property="delegate" destination="pUn-hc-7kX" id="Jpm-Di-hew"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Meetings" id="6EV-49-qmF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DQY-M5-qk1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1696" y="-1101"/>
+        </scene>
+        <!--Meeting On Map View Controller-->
+        <scene sceneID="vEB-uK-zj9">
+            <objects>
+                <viewController id="tpi-M2-Aaz" customClass="MeetingOnMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="e6H-Z6-3AS"/>
+                        <viewControllerLayoutGuide type="bottom" id="I1d-Hw-jP4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jRS-yj-Dzf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gLb-gP-Ln3">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dn7-eb-FiM"/>
+                    <connections>
+                        <outlet property="mapView" destination="gLb-gP-Ln3" id="aTn-Vz-HbH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Zt-Tp-bnM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2091" y="-1101"/>
+        </scene>
+        <!--Navigation Controller - Meetings-->
+        <scene sceneID="0O0-1K-i1q">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="xby-hc-fdC" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Meetings" id="bj5-az-1bb"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="lLc-u2-Qgh">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="pUn-hc-7kX" kind="relationship" relationship="rootViewController" id="qLm-Tg-QF9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tXy-2a-1PJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1164" y="-1101"/>
         </scene>
         <!--See On Map View Controller-->
         <scene sceneID="dGp-Bz-8aS">
