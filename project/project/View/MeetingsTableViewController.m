@@ -8,6 +8,9 @@
 
 #import "MeetingsTableViewController.h"
 #import "MeetingOnMapViewController.h"
+#import "Notification.h"
+#import "User+Annotation.h"
+
 
 @interface MeetingsTableViewController ()
 
@@ -19,12 +22,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSArray *array = [self.meetings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSDate *s1 = [obj1 valueForKey:@"date"];
-        NSDate *s2 = [obj2 valueForKey:@"date"];
-        return [s1 compare:s2];
-    }];
-    self.meetings = [array mutableCopy];
+    
+    [[NSNotificationCenter defaultCenter] addObserverForName:NotificationUser
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      User *u = note.userInfo[USER];
+                                                      NSArray *array = [u.meetings sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+                                                          NSDate *s1 = [obj1 valueForKey:@"date"];
+                                                          NSDate *s2 = [obj2 valueForKey:@"date"];
+                                                          return [s1 compare:s2];
+                                                      }];
+                                                      self.meetings = [array mutableCopy];
+                                                  }];
+
+    
+    
+    
+    
+}
+
+- (void) setMeetings:(NSMutableArray *)meetings {
+    _meetings = meetings;
+    [[self.tabBarController.tabBar.items objectAtIndex:4] setBadgeValue:[NSString stringWithFormat:@"%d",[self.meetings count]]];
+    [self.tableView reloadData];
 }
 
 

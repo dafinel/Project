@@ -6,6 +6,9 @@
 //  Copyright (c) 2014 Andrei-Daniel Anton. All rights reserved.
 //
 #import "CereriTableViewController.h"
+#import "Notification.h"
+#import "User+Annotation.h"
+#import "MyAplicationAppDelegate.h"
 
 //#define kBaseURL @"http://localhost:3000/"
 #define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
@@ -16,6 +19,30 @@
 @end
 
 @implementation CereriTableViewController
+
+
+#pragma mark -initialization
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NotificationUser
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      User *u = note.userInfo[USER];
+                                                      self.cereri = u.cereri;
+                                                      
+                                                  }];
+}
+
+-(void)setCereri:(NSMutableArray *)cereri {
+    _cereri = cereri;
+    self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[self.cereri count]];
+    [self.tableView reloadData];
+}
+
 
 #pragma mark - Table view data source
 
@@ -48,12 +75,6 @@
     [but addTarget:self action:@selector(acceptAction) forControlEvents:UIControlEventTouchUpInside];
     [cell.contentView addSubview:but];
     
-    
-    
-   
-    
-    
-
     return cell;
 }
 
@@ -74,6 +95,7 @@
         if (!error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.cereri removeObject:dic];
+            self.tabBarItem.badgeValue = [NSString stringWithFormat:@"%d",[self.cereri count]];
             [self.tableView reloadData];
         });
         }

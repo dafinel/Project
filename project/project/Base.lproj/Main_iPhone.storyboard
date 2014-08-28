@@ -466,17 +466,24 @@
                         <viewControllerLayoutGuide type="bottom" id="UWr-Pk-shM"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OVg-AA-1XK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="jDe-5y-ZQ6">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="KlL-l1-3iN"/>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" id="KlL-l1-3iN">
+                        <barButtonItem key="rightBarButtonItem" title="SendVoiceMessage" id="mFV-ao-LOw">
+                            <connections>
+                                <action selector="sendVoiceMessageAction:" destination="iZc-xi-LvX" id="Gxf-nE-Kmj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="mapView" destination="jDe-5y-ZQ6" id="w0f-Mj-eJ6"/>
                     </connections>

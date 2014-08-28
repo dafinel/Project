@@ -36,6 +36,8 @@
 		752F4F32199506B100AED595 /* User+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F31199506B100AED595 /* User+Annotation.m */; };
 		75546C6519AC659400EADB75 /* MeetingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75546C6419AC659400EADB75 /* MeetingsTableViewController.m */; };
 		75546C6819AC753700EADB75 /* MeetingOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75546C6719AC753700EADB75 /* MeetingOnMapViewController.m */; };
+		759A4BC319ADFD180061E639 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75400C0019A5E0AC00FC8E00 /* MessageUI.framework */; };
+		759A4BC519AE15E50061E639 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 759A4BC419AE15E50061E639 /* AVFoundation.framework */; };
 		75AA4EC019A3382E003A5BE5 /* AddfriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */; };
 		75AA4EC319A3785D003A5BE5 /* CereriTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75AA4EC219A3785D003A5BE5 /* CereriTableViewController.m */; };
 		75B3F8A41998FCEA00CCB930 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */; };
@@ -100,6 +102,8 @@
 		75546C6419AC659400EADB75 /* MeetingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingsTableViewController.m; path = View/MeetingsTableViewController.m; sourceTree = "<group>"; };
 		75546C6619AC753700EADB75 /* MeetingOnMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingOnMapViewController.h; path = View/MeetingOnMapViewController.h; sourceTree = "<group>"; };
 		75546C6719AC753700EADB75 /* MeetingOnMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingOnMapViewController.m; path = View/MeetingOnMapViewController.m; sourceTree = "<group>"; };
+		759A4BC419AE15E50061E639 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		759A4BC719AE22D80061E639 /* Notification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Notification.h; sourceTree = "<group>"; };
 		75AA4EBE19A3382E003A5BE5 /* AddfriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AddfriendViewController.h; path = View/AddfriendViewController.h; sourceTree = "<group>"; };
 		75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AddfriendViewController.m; path = View/AddfriendViewController.m; sourceTree = "<group>"; };
 		75AA4EC119A3785D003A5BE5 /* CereriTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CereriTableViewController.h; path = View/CereriTableViewController.h; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				759A4BC519AE15E50061E639 /* AVFoundation.framework in Frameworks */,
+				759A4BC319ADFD180061E639 /* MessageUI.framework in Frameworks */,
 				75B3F8A41998FCEA00CCB930 /* CoreLocation.framework in Frameworks */,
 				752F4F2F199502ED00AED595 /* MapKit.framework in Frameworks */,
 				7509C52E1993B70700276BD2 /* CoreGraphics.framework in Frameworks */,
@@ -155,6 +161,7 @@
 		7509C52A1993B70700276BD2 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				759A4BC419AE15E50061E639 /* AVFoundation.framework */,
 				75400C0019A5E0AC00FC8E00 /* MessageUI.framework */,
 				75B3F8A31998FCEA00CCB930 /* CoreLocation.framework */,
 				752F4F2E199502ED00AED595 /* MapKit.framework */,
@@ -224,8 +231,8 @@
 				751AC1CF19A1D3230051A0F0 /* LocationHistoryMapVCViewController.h */,
 				751AC1D019A1D3230051A0F0 /* LocationHistoryMapVCViewController.m */,
 				751AC1D819A1F8570051A0F0 /* FriendListTableViewController.h */,
-				751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */,
 				751AC1DE19A21A740051A0F0 /* SeeOnMapViewController.h */,
+				751AC1D919A1F8570051A0F0 /* FriendListTableViewController.m */,
 				751AC1DF19A21A740051A0F0 /* SeeOnMapViewController.m */,
 				75AA4EBE19A3382E003A5BE5 /* AddfriendViewController.h */,
 				75AA4EBF19A3382E003A5BE5 /* AddfriendViewController.m */,
@@ -235,6 +242,7 @@
 				75546C6419AC659400EADB75 /* MeetingsTableViewController.m */,
 				75546C6619AC753700EADB75 /* MeetingOnMapViewController.h */,
 				75546C6719AC753700EADB75 /* MeetingOnMapViewController.m */,
+				759A4BC719AE22D80061E639 /* Notification.h */,
 			);
 			name = VIew;
 			sourceTree = "<group>";

@@ -11,17 +11,20 @@
 #import "User+Annotation.h"
 #import "Friend.h"
 #import "Location.h"
+#import <MessageUI/MessageUI.h>
+#import <AVFoundation/AVFoundation.h>
 
 //#define kBaseURL @"http://localhost:3000/"
 #define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
 #define kLocations @"users"
 
-@interface SeeOnMapViewController () <MKMapViewDelegate , UIAlertViewDelegate>
+@interface SeeOnMapViewController () <MKMapViewDelegate , UIAlertViewDelegate,MFMessageComposeViewControllerDelegate,AVAudioRecorderDelegate>
 @property (weak, nonatomic  ) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) NSArray *arrRoutePoints;
 @property (nonatomic, strong) MKPolyline *objPolyline;
 @property (nonatomic        ) BOOL alertshow;
 @property (nonatomic, strong) NSDate *alertViewDate;
+@property (nonatomic, strong) AVAudioRecorder *audioRecorder;
 
 @end
 
@@ -173,7 +176,7 @@
 - (void)updateTime:(id)sender {
      UIDatePicker *picker = (UIDatePicker*)sender;
      self.alertViewDate = picker.date;
-    NSLog(@"%@",self.alertViewDate);
+    
 }
 
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
@@ -218,11 +221,13 @@
         [dataTask resume];
         self.alertshow = NO;
         
-
-
+        [self showSMS:[self getNumberOfPersonWhoMeet:idprieten]];
+        
         
     }
 }
+
+#pragma mark - Draw route on map
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay {
     MKPolylineView *polylineView = [[MKPolylineView alloc] initWithPolyline:overlay];
@@ -284,8 +289,6 @@
         lng += dlng;
         NSNumber *latitude = [[NSNumber alloc] initWithFloat:lat * 1e-5];
         NSNumber *longitude = [[NSNumber alloc] initWithFloat:lng * 1e-5];
-        printf("\n[%f,", [latitude doubleValue]);
-        printf("%f]", [longitude doubleValue]);
         CLLocation *loc = [[CLLocation alloc] initWithLatitude:[latitude floatValue] longitude:[longitude floatValue]];
         [array addObject:loc];
     }
@@ -344,6 +347,98 @@
         [self.mapView setRegion:region animated:YES];
     }
 }
+
+#pragma mark -Message delegate
+
+- (IBAction)sendVoiceMessageAction:(UIBarButtonItem *)sender {
+    UIAlertView *recordingAlert = [[UIAlertView alloc] initWithTitle:@"Recording" message:@"Recording the Message" delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitles:@"ok",nil];
+    [recordingAlert show];
+    
+    
+}
+
+- (void)showSMS:(NSString *)number {
+    
+    if(![MFMessageComposeViewController canSendText]) {
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your device doesn't support SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [warningAlert show];
+        return;
+    }
+    
+    NSString *message = [NSString stringWithFormat:@"Meeting set. Please check! http://projectRunApp://"];
+    
+    MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
+    messageController.messageComposeDelegate = self;
+    [messageController setRecipients:@[number]];
+    [messageController setBody:message];
+    
+    // Present message view controller on screen
+    [self presentViewController:messageController animated:YES completion:nil];
+    
+}
+
+- (NSString *)getNumberOfPersonWhoMeet:(NSString *)personWhoMeet {
+    __block NSString * number;
+    __block BOOL ok = NO;
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:[NSString stringWithFormat:@"/%@",personWhoMeet]]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    [config setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    //NSURLSession *session = [NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:[NSOperationQueue mainQueue]];
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            if ([responseArray count]) {
+                // dispatch_async(dispatch_get_main_queue(), ^{
+                number = responseArray[@"number"];
+                ok = YES;
+                // });
+                
+            } else {
+                //error;
+                
+            }
+        }
+    }];
+    
+    [dataTask resume];
+    while (!ok) {
+        
+    }
+
+    
+    
+    return number;
+}
+
+
+- (void)messageComposeViewController:(MFMessageComposeViewController *)controller didFinishWithResult:(MessageComposeResult) result
+{
+    switch (result) {
+        case MessageComposeResultCancelled:
+            break;
+            
+        case MessageComposeResultFailed:
+        {
+            UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Failed to send SMS!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [warningAlert show];
+            break;
+        }
+            
+        case MessageComposeResultSent:
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 /*
 #pragma mark - Navigation

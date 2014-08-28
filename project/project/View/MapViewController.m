@@ -10,6 +10,7 @@
 #import "User+Annotation.h"
 #import <MapKit/MapKit.h>
 #import <MapKit/MKAnnotationView.h>
+#import "Notification.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -51,6 +52,19 @@
     return pinView;
 }
 
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NotificationUser
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.user = note.userInfo[USER];
+                                                      [self updateMapViewAnnotations];
+                                                  }];
+       
+}
 /*
 #pragma mark - Navigation
 

@@ -9,6 +9,7 @@
 #import "LocationHistoryMapVCViewController.h"
 #import <MapKit/MapKit.h>
 #import "User+Annotation.h"
+#import "Notification.h"
 
 @interface LocationHistoryMapVCViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -49,6 +50,20 @@
 
 - (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
     
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    [[NSNotificationCenter defaultCenter] addObserverForName:NotificationUser
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.user = note.userInfo[USER];
+                                                      [self updateMapViewAnnotations];
+                                                  }];
+        
 }
 
 /*

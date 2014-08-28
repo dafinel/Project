@@ -7,6 +7,10 @@
 //
 
 #import "MyAplicationViewController.h"
+#import "Notification.h"
+
+#define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
+#define kLocations @"users"
 
 @interface MyAplicationViewController ()
 
@@ -18,7 +22,14 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSLog(@"%@",self.user.name);
+    /*[[NSNotificationCenter defaultCenter] addObserverForName:NotificationUser
+                                                      object:nil
+                                                       queue:nil
+                                                  usingBlock:^(NSNotification *note) {
+                                                      self.user = note.userInfo[USER];
+                                                  }];
+*/
 }
+
 
 @end

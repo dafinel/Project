@@ -16,6 +16,7 @@
 #import "Friend.h"
 #import "CereriTableViewController.h"
 #import "MeetingsTableViewController.h"
+#import "Notification.h"
 
 
 //#define kBaseURL @"http://localhost:3000/"
@@ -37,8 +38,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [NSTimer scheduledTimerWithTimeInterval:60
+                                     target:self
+                                   selector:@selector(startFetch:)
+                                   userInfo:nil
+                                    repeats:YES];
+
     
 }
+
+- (void)startFetch:(NSTimer *)time {
+    __block BOOL ok = NO;
+    NSLog(@"fetch");
+    NSString *udid = [[NSUserDefaults standardUserDefaults]stringForKey:@"_id"];
+    udid = [NSString stringWithFormat:@"/%@",udid];
+    NSURL * url = [NSURL URLWithString:[kBaseURL stringByAppendingPathComponent:kLocations]];
+    url = [NSURL URLWithString:[[url absoluteString] stringByAppendingString:udid]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    request.HTTPMethod = @"GET";
+    [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    NSURLSessionConfiguration* config = [NSURLSessionConfiguration defaultSessionConfiguration];
+    [config setRequestCachePolicy:NSURLRequestReloadIgnoringCacheData];
+    NSURLSession* session = [NSURLSession sessionWithConfiguration:config];
+    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        if (error == nil) {
+            NSDictionary* responseArray = [NSJSONSerialization JSONObjectWithData:data options:0 error:NULL];
+            if ([responseArray count]) {
+                // dispatch_async(dispatch_get_main_queue(), ^{
+                User *thisuser =[[User alloc] initWithDictionary:responseArray];
+                self.user = thisuser;
+                ok = YES;
+                // });
+  
+            } else {
+                //error;
+                
+            }
+        }
+    }];
+    
+    [dataTask resume];
+    while (!ok) {
+        
+    }
+    NSDictionary *userInfo = self.user ? @{USER : self.user} : nil;
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationUser object:self userInfo:userInfo];
+}
+
+
 
 -(BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -95,6 +142,7 @@
     while (!self.doSegue) {
         
     }
+   
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"forgotPassword"]) {
