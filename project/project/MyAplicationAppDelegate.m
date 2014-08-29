@@ -8,6 +8,8 @@
 
 #import "MyAplicationAppDelegate.h"
 #import "SendLocation.h"
+#import <GoogleMaps/GoogleMaps.h>
+
 
 //#define kBaseURL @"http://localhost:3000/"
 #define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
@@ -29,6 +31,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    
+    [GMSServices provideAPIKey:@"AIzaSyDMKrOZXP3iBcLW33KSMsGMAP-FLEqy5gE"];
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     

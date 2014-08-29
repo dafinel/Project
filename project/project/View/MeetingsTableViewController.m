@@ -10,6 +10,7 @@
 #import "MeetingOnMapViewController.h"
 #import "Notification.h"
 #import "User+Annotation.h"
+#import "AugumentRealityViewController.h"
 
 
 @interface MeetingsTableViewController ()

@@ -269,11 +269,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Friend Cell" textLabel="bCx-36-eal" detailTextLabel="kFh-xg-amT" style="IBUITableViewCellStyleSubtitle" id="y3b-T7-AF7">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="detailDisclosureButton" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Friend Cell" textLabel="bCx-36-eal" detailTextLabel="kFh-xg-amT" style="IBUITableViewCellStyleSubtitle" id="y3b-T7-AF7">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="y3b-T7-AF7" id="9fs-kH-DZm">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="253" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="bCx-36-eal">
@@ -294,6 +294,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <segue destination="iZc-xi-LvX" kind="push" identifier="See on map" id="q7D-Jk-hBg"/>
+                                    <segue destination="Sw2-he-VNA" kind="push" identifier="streetView" trigger="accessoryAction" id="037-q5-g2F"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -491,6 +492,45 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bNE-BK-i2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1651" y="683"/>
+        </scene>
+        <!--Augument Reality View Controller-->
+        <scene sceneID="sc4-Ig-j3Q">
+            <objects>
+                <viewController id="Sw2-he-VNA" customClass="AugumentRealityViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3ug-c6-k6B"/>
+                        <viewControllerLayoutGuide type="bottom" id="zoq-iZ-3ho"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xmt-mM-fYs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s1V-9s-eS6">
+                                <rect key="frame" x="20" y="84" width="99" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="view of friend">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="view:" destination="Sw2-he-VNA" eventType="touchUpInside" id="UoN-0y-oKv"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L2Y-J5-Ffx">
+                                <rect key="frame" x="40" y="122" width="240" height="283"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="9ac-TJ-30w"/>
+                    <connections>
+                        <outlet property="imageView" destination="L2Y-J5-Ffx" id="GiV-D0-O1U"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0QQ-20-TS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1651" y="1251"/>
         </scene>
         <!--Forgot Password View Controller - SecondViewController-->
         <scene sceneID="XQ8-hk-JYp">

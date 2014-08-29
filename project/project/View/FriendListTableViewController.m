@@ -10,6 +10,7 @@
 #import "Friend.h"
 #import "SeeOnMapViewController.h"
 #import "Notification.h"
+#import "AugumentRealityViewController.h"
 
 @interface FriendListTableViewController ()
 
@@ -17,6 +18,8 @@
 
 @implementation FriendListTableViewController
 
+
+#pragma mark - fetching
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -118,6 +121,10 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
+    
+}
+
 
 #pragma mark - Navigation
 
@@ -135,7 +142,15 @@
             Friend *fr = self.friends[indexPath.row];
             ivc.friends = @[fr];
         }
-    }
+     }else if ([segue.identifier isEqualToString:@"streetView"]) {
+         if ([segue.destinationViewController isKindOfClass:[AugumentRealityViewController class]]) {
+             AugumentRealityViewController *myvc = (AugumentRealityViewController *)segue.destinationViewController;
+            Friend *fr = self.friends[indexPath.row];
+             myvc.location = fr.location;
+         }
+         
+     }
+
 }
 
 
