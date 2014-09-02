@@ -23,7 +23,8 @@
 - (void) updateMapViewAnnotations {
     [self.mapView removeAnnotations:self.mapView.annotations];
     //[self.mapView addAnnotation:self.user];
-    [self.mapView showAnnotations:@[self.user] animated:YES];
+   // [self.mapView showAnnotations:@[self.user] animated:YES];
+    self.mapView.showsUserLocation = YES;
 }
 
 - (void)setMapView:(MKMapView *)mapView {
@@ -34,22 +35,32 @@
 }
 
 -(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    MKPinAnnotationView *pinView = nil;
+    MKAnnotationView *view = nil;
     if(annotation != mapView.userLocation)
     {
         static NSString *defaultPinID = @"com.invasivecode.pin";
-        pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
+        MKPinAnnotationView *pinView = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:defaultPinID];
         if ( pinView == nil ) pinView = [[MKPinAnnotationView alloc]
                                          initWithAnnotation:annotation reuseIdentifier:defaultPinID];
         
         pinView.pinColor = MKPinAnnotationColorPurple;
         pinView.animatesDrop = YES;
+        view = pinView;
     }
     else {
-        [mapView.userLocation setTitle:@"I am here"];
+        //[mapView.userLocation setTitle:@"I am here"];
+        [mapView.userLocation setTitle:[NSString stringWithFormat:@"%@",mapView.userLocation.location ]];
     }
     
-    return pinView;
+    return view;
+}
+
+- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
+    MKCircleRenderer *rendered = [[MKCircleRenderer alloc] initWithCircle:(MKCircle *)overlay];
+    rendered.strokeColor = [UIColor blueColor];
+    rendered.lineWidth = 2.0;
+    //rendered.fillColor = [UIColor blueColor];
+    return rendered;
 }
 
 - (void)viewDidLoad
@@ -63,7 +74,11 @@
                                                       self.user = note.userInfo[USER];
                                                       [self updateMapViewAnnotations];
                                                   }];
-       
+    CLLocationCoordinate2D location =CLLocationCoordinate2DMake(47.157755, 27.604026);
+    //
+    MKCircle *circle = [MKCircle circleWithCenterCoordinate:location radius:200.0];
+    [self.mapView addOverlay:circle];
+    
 }
 /*
 #pragma mark - Navigation

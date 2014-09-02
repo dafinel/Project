@@ -11,6 +11,8 @@
 #import <GoogleMaps/GoogleMaps.h>
 
 
+
+
 //#define kBaseURL @"http://localhost:3000/"
 #define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
 #define kLocations @"users"
@@ -32,8 +34,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    
     [GMSServices provideAPIKey:@"AIzaSyDMKrOZXP3iBcLW33KSMsGMAP-FLEqy5gE"];
+   
     
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     
@@ -41,22 +43,83 @@
         //[[LocationController sharedInstance] startMonitoringSignificantLocationChanges];
     //    return YES;
     //} else {
+    if (!self.locationManager) {
+        
         self.locationManager = [[CLLocationManager alloc] init];
         self.locationManager.delegate = self;
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        self.locationManager.distanceFilter = kCLDistanceFilterNone;
-        self.locationManager.activityType = CLActivityTypeOtherNavigation;
-        [self.locationManager startMonitoringSignificantLocationChanges];
+        //self.locationManager.distanceFilter = kCLDistanceFilterNone;
+        [self.locationManager startUpdatingLocation];
+       // [self.locationManager startMonitoringSignificantLocationChanges];
+    
         
-        self.locationManager = _locationManager;
+
+    }
+        //self.locationManager = _locationManager;
         // Override point for customization after application launch.
         return YES;
     //}
     
 }
 
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+-(void) writeToTextFile:(NSString *)string{
+    //get the documents directory:
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
     
+    //make a file name to write the data to using the documents directory:
+    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.txt",
+                          documentsDirectory];
+    //create content - four lines of text
+    //NSString *content = @"One\nTwo\nThree\nFour\nFive";
+    //save content to the documents directory
+    [string writeToFile:fileName
+              atomically:NO
+                encoding:NSStringEncodingConversionAllowLossy
+                   error:nil];
+    
+}
+
+-(void) displayContent{
+    //get the documents directory:
+    NSArray *paths = NSSearchPathForDirectoriesInDomains
+    (NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    
+    //make a file name to write the data to using the documents directory:
+    NSString *fileName = [NSString stringWithFormat:@"%@/textfile.txt",
+                          documentsDirectory];
+    NSString *content = [[NSString alloc] initWithContentsOfFile:fileName
+                                                    usedEncoding:nil
+                                                           error:nil];
+    //use simple alert from my library (see previous post for details)
+    NSLog(@"%@",content);
+    
+}
+
+#pragma mark - location manager delegate
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+ 
+    static BOOL firstTime=TRUE;
+    CLLocation *newLocation = [locations lastObject];
+    NSLog(@"lat: %f, long: %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    if(firstTime)
+    {
+        firstTime = FALSE;
+        CLLocationCoordinate2D location =  CLLocationCoordinate2DMake(47.157755, 27.604026);
+        //CLLocationCoordinate2D location =CLLocationCoordinate2DMake(37.3292935,-122.024417);
+        CLRegion *grRegion = [[CLCircularRegion alloc] initWithCenter:location radius:200.0 identifier:@"AppStore"];
+        [self.locationManager startMonitoringForRegion:grRegion];
+
+        
+        //Stop Location Updation, we dont need it now.
+        [self.locationManager stopUpdatingLocation];
+    }
+        
+    
+    /*
      self.location = [locations lastObject];
   //  if (![self.location isEqual:self.lastLocation]) {
         self.lastLocation = self.location;
@@ -84,8 +147,42 @@
         }
         
    // }
+    */
     
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+{
+    NSLog(@"location enter");
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"alert" message:@"am intrat in range" delegate:self cancelButtonTitle:@"cancel" otherButtonTitles:nil];
+    [alert show];
     
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    NSLog(@"region exit");
+    [self writeToTextFile:@"region exit"];
+    [self.locationManager stopMonitoringForRegion:region];
+    CLCircularRegion *grRegion = [[CLCircularRegion alloc] initWithCenter:manager.location.coordinate radius:10.0 identifier:@"my region"];
+    [self.locationManager startMonitoringForRegion:grRegion];
+   
+}
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    CLCircularRegion *circularRegion = (CLCircularRegion *)region;
+    NSLog(@"start monitoring region with center lat: %lf, long: %lf", circularRegion.center.latitude, circularRegion.center.longitude);
+    NSString *string = [NSString stringWithFormat:@"start monitoring region with center lat: %f, long: %f", circularRegion.center.latitude, circularRegion.center.longitude];
+    [self writeToTextFile: string];
+}
+
+- (void)locationManager:(CLLocationManager *)manager
+monitoringDidFailForRegion:(CLRegion *)region
+              withError:(NSError *)error
+{
+    NSLog(@"monitoringDidFailForRegion: %@ \n%@", region, error);
+    NSString *string = [NSString stringWithFormat:@"monitoringDidFailForRegion: %@ \n%@", region, error];
+    [self writeToTextFile:string];
 }
 
 -(void)sendBackgroundLocationToServer:(NSDictionary *)location {
@@ -333,7 +430,6 @@ totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [self.locationManager startMonitoringSignificantLocationChanges];
 }
-
 
 
 @end

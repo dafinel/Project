@@ -11,14 +11,12 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreMotion/CoreMotion.h>
 
-@interface AugumentRealityViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface AugumentRealityViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) CMMotionManager *motionManager;
-@property (nonatomic ) CLLocationCoordinate2D coord;
-
-
+@property (nonatomic, strong) CLLocationManager *manager;
 @end
 
 @implementation AugumentRealityViewController
@@ -29,10 +27,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    CLLocationDegrees lat = self.location.latitude;
-    CLLocationDegrees lon = self.location.longitude;
-    self.coord = CLLocationCoordinate2DMake(lat,lon);
-    
+    self.manager = [[CLLocationManager alloc] init];
 }
 
 #pragma mark - Core Motion
@@ -60,15 +55,19 @@
     [panoView_ moveNearCoordinate:CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude)];
     [self presentViewController:uiipc animated:YES completion:NULL];
    
-    /*if (!self.motionManager.isDeviceMotionActive) {
+    if (!self.motionManager.isDeviceMotionActive) {
         [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue]
                                                 withHandler:^(CMDeviceMotion *motion, NSError *error) {
                                                     
-                                                   // [panoView_ updateCamera:[GMSPanoramaCameraUpdate rotateBy:-motion.attitude.roll] animationDuration:0];
+                                                    CMAttitude *currentAttitude = motion.attitude;
+                                                    CGFloat xRotation = currentAttitude.roll*180/M_PI;
+                                                   CGFloat yRotation = currentAttitude.pitch*180/M_PI;
+                                                   CGFloat zRotation = currentAttitude.yaw*180/M_PI;
+                                                 //   panoView_ updateCamera:GMSPanoramaCameraUpdate rotateBy:<#(CGFloat)#> animationDuration:<#(NSTimeInterval)#>
                                                     
                                                 }];
     }
-     */
+    
     
 
 }

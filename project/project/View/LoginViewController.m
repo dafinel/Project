@@ -38,11 +38,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [NSTimer scheduledTimerWithTimeInterval:60
+ /*   [NSTimer scheduledTimerWithTimeInterval:60
                                      target:self
                                    selector:@selector(startFetch:)
                                    userInfo:nil
                                     repeats:YES];
+  */
 
     
 }
