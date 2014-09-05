@@ -1611,13 +1611,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "project/MyAplicationAppDelegate.m"
-            timestampString = "431357140.828884"
+            filePath = "project/LocationTracker.m"
+            timestampString = "431422186.458678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-locationManager:didUpdateLocations:"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "-startLocationTracking"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1627,61 +1627,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "project/MyAplicationAppDelegate.m"
-            timestampString = "431357140.828884"
+            filePath = "project/View/AugumentRealityViewController.m"
+            timestampString = "431434672.626533"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "155"
-            endingLineNumber = "155"
-            landmarkName = "-locationManager:didEnterRegion:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "project/MyAplicationAppDelegate.m"
-            timestampString = "431357140.828884"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "-locationManager:didExitRegion:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "project/MyAplicationAppDelegate.m"
-            timestampString = "431357140.828884"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-locationManager:didStartMonitoringForRegion:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "project/MyAplicationAppDelegate.m"
-            timestampString = "431357243.460961"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-locationManager:didUpdateLocations:"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-view:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

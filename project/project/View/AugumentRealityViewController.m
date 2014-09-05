@@ -10,13 +10,19 @@
 #import <GoogleMaps/GoogleMaps.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreMotion/CoreMotion.h>
+#import "AugmentedRealityController.h"
 
-@interface AugumentRealityViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,CLLocationManagerDelegate>
+#define CC_RADIANS_TO_DEGREES(__ANGLE__) ((__ANGLE__) * 57.29577951f) // PI * 180
+
+@interface AugumentRealityViewController ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,ARDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
+
 @property (nonatomic, strong) CMMotionManager *motionManager;
 @property (nonatomic, strong) CLLocationManager *manager;
+
+@property (nonatomic, strong) AugmentedRealityController *arController;
 @end
 
 @implementation AugumentRealityViewController
@@ -26,8 +32,35 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.manager = [[CLLocationManager alloc] init];
+    panoView_ = [[GMSPanoramaView alloc] initWithFrame:CGRectZero];
+    [panoView_ moveNearCoordinate:CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude)];
+    [panoView_ sizeToFit];
+    self.view = panoView_;
+    
+    if(!_arController) {
+        _arController = [[AugmentedRealityController alloc] initWithView:[self view] parentViewController:self withDelgate:self];
+    }
+    
+    [_arController setMinimumScaleFactor:0.5];
+    [_arController setScaleViewsBasedOnDistance:YES];
+    [_arController setRotateViewsBasedOnPerspective:YES];
+    [_arController setDebugMode:NO];
+    
+}
+
+-(void)didUpdateHeading:(CLHeading *)newHeading {
+    
+    [panoView_ setCamera:[GMSPanoramaCamera cameraWithHeading:newHeading.trueHeading pitch:0 zoom:1.0]];
+    
+}
+
+-(void)didUpdateLocation:(CLLocation *)newLocation {
+    
+    
+}
+
+-(void)didUpdateOrientation:(UIDeviceOrientation)orientation {
+    
 }
 
 #pragma mark - Core Motion
@@ -36,7 +69,7 @@
 {
     if (!_motionManager) {
         _motionManager = [[CMMotionManager alloc] init];
-        _motionManager.deviceMotionUpdateInterval = 0.1;
+        _motionManager.deviceMotionUpdateInterval = 1.0/60.0;
     }
     return _motionManager;
 }
@@ -51,26 +84,14 @@
     uiipc.allowsEditing = YES;
     panoView_ = [[GMSPanoramaView alloc] initWithFrame:CGRectZero];
     uiipc.view = panoView_;
+   // uiipc.cameraOverlayView = panoView_;
     //self.view = panoView_;
     [panoView_ moveNearCoordinate:CLLocationCoordinate2DMake(self.location.latitude, self.location.longitude)];
     [self presentViewController:uiipc animated:YES completion:NULL];
    
-    if (!self.motionManager.isDeviceMotionActive) {
-        [self.motionManager startDeviceMotionUpdatesToQueue:[NSOperationQueue mainQueue]
-                                                withHandler:^(CMDeviceMotion *motion, NSError *error) {
-                                                    
-                                                    CMAttitude *currentAttitude = motion.attitude;
-                                                    CGFloat xRotation = currentAttitude.roll*180/M_PI;
-                                                   CGFloat yRotation = currentAttitude.pitch*180/M_PI;
-                                                   CGFloat zRotation = currentAttitude.yaw*180/M_PI;
-                                                 //   panoView_ updateCamera:GMSPanoramaCameraUpdate rotateBy:<#(CGFloat)#> animationDuration:<#(NSTimeInterval)#>
-                                                    
-                                                }];
-    }
-    
-    
-
 }
+
+
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {

@@ -74,8 +74,9 @@
                                                       self.user = note.userInfo[USER];
                                                       [self updateMapViewAnnotations];
                                                   }];
-    CLLocationCoordinate2D location =CLLocationCoordinate2DMake(47.157755, 27.604026);
-    //
+   // CLLocationCoordinate2D location =CLLocationCoordinate2DMake(47.157755, 27.604026);
+    
+    CLLocationCoordinate2D location =CLLocationCoordinate2DMake(37.3292935,-122.024417);
     MKCircle *circle = [MKCircle circleWithCenterCoordinate:location radius:200.0];
     [self.mapView addOverlay:circle];
     

@@ -1,38 +1,17 @@
 //
-//  MyAplicationAppDelegate.m
-//  project
+//  LocationAppDelegate.m
+//  Location
 //
-//  Created by Andrei-Daniel Anton on 07/08/14.
-//  Copyright (c) 2014 ___FULLUSERNAME___. All rights reserved.
+//  Created by Rick
+//  Copyright (c) 2014 Location. All rights reserved.
 //
 
-#import "MyAplicationAppDelegate.h"
-#import "SendLocation.h"
-#import <GoogleMaps/GoogleMaps.h>
+#import "LocationAppDelegate.h"
 
+@implementation LocationAppDelegate
 
-
-
-//#define kBaseURL @"http://localhost:3000/"
-#define kBaseURL @"http://nodews-locatemeserver.rhcloud.com"
-#define kLocations @"users"
-#define SEND_DATA @"send data"
-#define BACKGROUND_FLICKR_FETCH_TIMEOUT (10)
-
-@interface MyAplicationAppDelegate()<CLLocationManagerDelegate,NSURLSessionDelegate>
-
-@property (nonatomic, strong) CLLocation *lastLocation;
-@property (nonatomic, strong) CLLocation *location;
-@property (nonatomic)UIBackgroundTaskIdentifier bgTask;
-@property (nonatomic, strong)NSURLSession *flickrDownloadSession;
-@property (copy, nonatomic) void (^flickrDownloadBackgroundURLSessionCompletionHandler)();
-
-@end
-
-@implementation MyAplicationAppDelegate
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [GMSServices provideAPIKey:@"AIzaSyDMKrOZXP3iBcLW33KSMsGMAP-FLEqy5gE"];
     
     self.locationTracker = [[LocationTracker alloc]init];
     [self.locationTracker startLocationTracking];
@@ -75,7 +54,5 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
 }
-
-
 
 @end

@@ -35,6 +35,15 @@
 		752F4F2D1995025D00AED595 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F2C1995025D00AED595 /* MapViewController.m */; };
 		752F4F2F199502ED00AED595 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 752F4F2E199502ED00AED595 /* MapKit.framework */; };
 		752F4F32199506B100AED595 /* User+Annotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 752F4F31199506B100AED595 /* User+Annotation.m */; };
+		7540828219B6EE090041385E /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540827919B6EE090041385E /* BackgroundTaskManager.m */; };
+		7540828319B6EE090041385E /* LocationAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540827B19B6EE090041385E /* LocationAppDelegate.m */; };
+		7540828419B6EE090041385E /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540827D19B6EE090041385E /* LocationShareModel.m */; };
+		7540828519B6EE090041385E /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540827F19B6EE090041385E /* LocationTracker.m */; };
+		7540829619B7203E0041385E /* ARCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540828B19B7203E0041385E /* ARCoordinate.m */; };
+		7540829719B7203E0041385E /* ARGeoCoordinate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540828D19B7203E0041385E /* ARGeoCoordinate.m */; };
+		7540829819B7203E0041385E /* ARKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540828F19B7203E0041385E /* ARKit.m */; };
+		7540829919B7203E0041385E /* AugmentedRealityController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540829319B7203E0041385E /* AugmentedRealityController.m */; };
+		7540829A19B7203E0041385E /* GEOLocations.m in Sources */ = {isa = PBXBuildFile; fileRef = 7540829519B7203E0041385E /* GEOLocations.m */; };
 		75546C6519AC659400EADB75 /* MeetingsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75546C6419AC659400EADB75 /* MeetingsTableViewController.m */; };
 		75546C6819AC753700EADB75 /* MeetingOnMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75546C6719AC753700EADB75 /* MeetingOnMapViewController.m */; };
 		759A4BC319ADFD180061E639 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75400C0019A5E0AC00FC8E00 /* MessageUI.framework */; };
@@ -113,6 +122,26 @@
 		752F4F30199506B100AED595 /* User+Annotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Annotation.h"; path = "Model/User+Annotation.h"; sourceTree = "<group>"; };
 		752F4F31199506B100AED595 /* User+Annotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Annotation.m"; path = "Model/User+Annotation.m"; sourceTree = "<group>"; };
 		75400C0019A5E0AC00FC8E00 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		7540827819B6EE090041385E /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		7540827919B6EE090041385E /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
+		7540827A19B6EE090041385E /* LocationAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationAppDelegate.h; sourceTree = "<group>"; };
+		7540827B19B6EE090041385E /* LocationAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationAppDelegate.m; sourceTree = "<group>"; };
+		7540827C19B6EE090041385E /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		7540827D19B6EE090041385E /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		7540827E19B6EE090041385E /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		7540827F19B6EE090041385E /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
+		7540828A19B7203E0041385E /* ARCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCoordinate.h; path = ARKit/ARCoordinate.h; sourceTree = "<group>"; };
+		7540828B19B7203E0041385E /* ARCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCoordinate.m; path = ARKit/ARCoordinate.m; sourceTree = "<group>"; };
+		7540828C19B7203E0041385E /* ARGeoCoordinate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARGeoCoordinate.h; path = ARKit/ARGeoCoordinate.h; sourceTree = "<group>"; };
+		7540828D19B7203E0041385E /* ARGeoCoordinate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARGeoCoordinate.m; path = ARKit/ARGeoCoordinate.m; sourceTree = "<group>"; };
+		7540828E19B7203E0041385E /* ARKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARKit.h; path = ARKit/ARKit.h; sourceTree = "<group>"; };
+		7540828F19B7203E0041385E /* ARKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARKit.m; path = ARKit/ARKit.m; sourceTree = "<group>"; };
+		7540829019B7203E0041385E /* ARLocationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARLocationDelegate.h; path = ARKit/ARLocationDelegate.h; sourceTree = "<group>"; };
+		7540829119B7203E0041385E /* ARViewProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARViewProtocol.h; path = ARKit/ARViewProtocol.h; sourceTree = "<group>"; };
+		7540829219B7203E0041385E /* AugmentedRealityController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AugmentedRealityController.h; path = ARKit/AugmentedRealityController.h; sourceTree = "<group>"; };
+		7540829319B7203E0041385E /* AugmentedRealityController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AugmentedRealityController.m; path = ARKit/AugmentedRealityController.m; sourceTree = "<group>"; };
+		7540829419B7203E0041385E /* GEOLocations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GEOLocations.h; path = ARKit/GEOLocations.h; sourceTree = "<group>"; };
+		7540829519B7203E0041385E /* GEOLocations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GEOLocations.m; path = ARKit/GEOLocations.m; sourceTree = "<group>"; };
 		75546C6319AC659400EADB75 /* MeetingsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingsTableViewController.h; path = View/MeetingsTableViewController.h; sourceTree = "<group>"; };
 		75546C6419AC659400EADB75 /* MeetingsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MeetingsTableViewController.m; path = View/MeetingsTableViewController.m; sourceTree = "<group>"; };
 		75546C6619AC753700EADB75 /* MeetingOnMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MeetingOnMapViewController.h; path = View/MeetingOnMapViewController.h; sourceTree = "<group>"; };
@@ -226,6 +255,8 @@
 		7509C5311993B70700276BD2 /* project */ = {
 			isa = PBXGroup;
 			children = (
+				7540828919B7201D0041385E /* ARKit */,
+				7540827719B6EDE30041385E /* Location */,
 				752F4F211994ACB700AED595 /* Model */,
 				7509C5631993B72100276BD2 /* VIew */,
 				7509C53A1993B70700276BD2 /* MyAplicationAppDelegate.h */,
@@ -314,6 +345,40 @@
 				751AC1DC19A1FA490051A0F0 /* Friend.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		7540827719B6EDE30041385E /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				7540827819B6EE090041385E /* BackgroundTaskManager.h */,
+				7540827919B6EE090041385E /* BackgroundTaskManager.m */,
+				7540827A19B6EE090041385E /* LocationAppDelegate.h */,
+				7540827B19B6EE090041385E /* LocationAppDelegate.m */,
+				7540827C19B6EE090041385E /* LocationShareModel.h */,
+				7540827D19B6EE090041385E /* LocationShareModel.m */,
+				7540827E19B6EE090041385E /* LocationTracker.h */,
+				7540827F19B6EE090041385E /* LocationTracker.m */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
+		7540828919B7201D0041385E /* ARKit */ = {
+			isa = PBXGroup;
+			children = (
+				7540828A19B7203E0041385E /* ARCoordinate.h */,
+				7540828B19B7203E0041385E /* ARCoordinate.m */,
+				7540828C19B7203E0041385E /* ARGeoCoordinate.h */,
+				7540828D19B7203E0041385E /* ARGeoCoordinate.m */,
+				7540828E19B7203E0041385E /* ARKit.h */,
+				7540828F19B7203E0041385E /* ARKit.m */,
+				7540829019B7203E0041385E /* ARLocationDelegate.h */,
+				7540829119B7203E0041385E /* ARViewProtocol.h */,
+				7540829219B7203E0041385E /* AugmentedRealityController.h */,
+				7540829319B7203E0041385E /* AugmentedRealityController.m */,
+				7540829419B7203E0041385E /* GEOLocations.h */,
+				7540829519B7203E0041385E /* GEOLocations.m */,
+			);
+			name = ARKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -424,16 +489,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7540828219B6EE090041385E /* BackgroundTaskManager.m in Sources */,
 				75546C6819AC753700EADB75 /* MeetingOnMapViewController.m in Sources */,
 				752F4F2A1994E5CF00AED595 /* ForgotPasswordViewController.m in Sources */,
+				7540829819B7203E0041385E /* ARKit.m in Sources */,
+				7540828319B6EE090041385E /* LocationAppDelegate.m in Sources */,
+				7540828419B6EE090041385E /* LocationShareModel.m in Sources */,
 				751AC1DD19A1FA490051A0F0 /* Friend.m in Sources */,
 				752F4F32199506B100AED595 /* User+Annotation.m in Sources */,
+				7540829A19B7203E0041385E /* GEOLocations.m in Sources */,
 				752F4F241994ACE200AED595 /* User.m in Sources */,
 				752F4F2019949D2500AED595 /* LoginViewController.m in Sources */,
 				751AC1D419A1EBA80051A0F0 /* Location.m in Sources */,
 				7524FFFE19AF59C50079160E /* AugumentRealityViewController.m in Sources */,
 				751AC1DA19A1F8570051A0F0 /* FriendListTableViewController.m in Sources */,
+				7540829619B7203E0041385E /* ARCoordinate.m in Sources */,
 				75AA4EC319A3785D003A5BE5 /* CereriTableViewController.m in Sources */,
+				7540829719B7203E0041385E /* ARGeoCoordinate.m in Sources */,
+				7540828519B6EE090041385E /* LocationTracker.m in Sources */,
 				751AC1D119A1D3230051A0F0 /* LocationHistoryMapVCViewController.m in Sources */,
 				7509C5451993B70700276BD2 /* MyAplicationViewController.m in Sources */,
 				7509C53C1993B70700276BD2 /* MyAplicationAppDelegate.m in Sources */,
@@ -442,6 +515,7 @@
 				7509C5381993B70700276BD2 /* main.m in Sources */,
 				75546C6519AC659400EADB75 /* MeetingsTableViewController.m in Sources */,
 				752F4F2D1995025D00AED595 /* MapViewController.m in Sources */,
+				7540829919B7203E0041385E /* AugmentedRealityController.m in Sources */,
 				75AA4EC019A3382E003A5BE5 /* AddfriendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -590,7 +664,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "project/project-Prefix.pch";
 				INFOPLIST_FILE = "project/project-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -610,7 +684,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "project/project-Prefix.pch";
 				INFOPLIST_FILE = "project/project-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
